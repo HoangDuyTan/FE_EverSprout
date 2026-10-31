@@ -1,6 +1,6 @@
-# Seedora - Plant Seeds & Seedlings Store 🌱
+# EverSprout - Plant Seeds & Seedlings Store 🌱
 
-Seedora is a front-end e-commerce website for selling plant seeds and seedlings, developed as a group project for a Front-End course. Built with React.js, the project focuses on creating a modern, user-friendly, and responsive shopping experience inspired by nature.
+EverSprout is a front-end e-commerce website for selling plant seeds and seedlings, developed as a group project for a Front-End course. Built with React.js, the project focuses on creating a modern, user-friendly, and responsive shopping experience inspired by nature.
 
 ## Features
 

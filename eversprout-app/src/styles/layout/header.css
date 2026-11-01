@@ -1,0 +1,114 @@
+.header {
+    background-color: var(--white);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.header-main {
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    min-width: 150px;
+}
+
+.logo strong {
+    color: var(--primary-color);
+    font-size: 24px;
+}
+
+.logo span {
+    color: var(--text-light);
+    font-size: 12px;
+}
+
+.search-box {
+    flex: 1;
+    display: flex;
+    border-bottom-left-radius: 6px;
+    border-top-left-radius: 6px;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+.search-box input:focus, .search-box input:hover {
+    border-bottom-left-radius: 6px;
+    border-top-left-radius: 6px;
+    border: 1px solid var(--primary-color);
+    transition: border-color 0.2s ease;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 12px 14px;
+    border: none;
+    outline: none;
+}
+
+.search-box button {
+    padding: 0 18px;
+    border: none;
+    color: var(--white);
+    background-color: var(--primary-color);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.header-actions > button {
+    border: none;
+    background: none;
+    font-size: 20px;
+}
+
+.hotline, .account {
+    display: flex;
+    flex-direction: column;
+}
+
+.account {
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.account:hover {
+    background-color: var(--primary-color) !important;
+    color: var(--primary-light);
+    padding: 10px;
+    border-radius: 15px;
+    transition: ease-in 0.2s;
+}
+
+.hotline span, .account > span {
+    color: var(--text-light);
+    font-size: 12px;
+}
+
+.hotline strong {
+    color: var(--primary-color);
+}
+
+.icon-btn {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    color: var(--text-color);
+    background-color: transparent;
+}
+
+.icon-btn:hover {
+    color: var(--primary-color);
+    background-color: var(--primary-light);
+}

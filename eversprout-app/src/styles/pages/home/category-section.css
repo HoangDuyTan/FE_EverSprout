@@ -1,0 +1,36 @@
+.home-category-section {
+    padding: 64px 0;
+    background-color: white;
+}
+
+.home-section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.home-section-heading > div > span {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--primary-color);
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.home-section-heading h2 {
+    font-size: 35px;
+}
+
+.home-section-heading > a {
+    color: var(--primary-color);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.home-category-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 18px;
+}

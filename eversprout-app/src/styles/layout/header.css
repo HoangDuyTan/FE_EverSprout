@@ -30,15 +30,17 @@
 .search-box {
     flex: 1;
     display: flex;
+    border-bottom-left-radius: 6px;
+    border-top-left-radius: 6px;
     border: 1px solid var(--border-color);
-    border-radius: 6px;
     overflow: hidden;
 }
 
-.search-box input[type="text"]:focus {
+.search-box input:focus, .search-box input:hover {
     border-bottom-left-radius: 6px;
     border-top-left-radius: 6px;
     border: 1px solid var(--primary-color);
+    transition: border-color 0.2s ease;
 }
 
 .search-box input {

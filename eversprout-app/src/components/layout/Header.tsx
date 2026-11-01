@@ -21,9 +21,9 @@ export default function Header() {
                         <strong>1900 6868</strong>
                     </div>
 
-                    <button type="button" className="icon-btn"><Heart size={20} /></button>
-                    <button type="button" className="icon-btn"><Bell size={20}/></button>
-                    <button type="button" className="icon-btn"><ShoppingCart size={20}/></button>
+                    <button type="button" className="icon-btn" title="Danh sách yêu thích"><Heart size={20} /></button>
+                    <button type="button" className="icon-btn" title="Thông báo"><Bell size={20}/></button>
+                    <button type="button" className="icon-btn" title="Giỏ hàng"><ShoppingCart size={20}/></button>
 
                     <button className="account">
                         <a href="/login">Đăng nhập</a>

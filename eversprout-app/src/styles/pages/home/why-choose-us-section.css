@@ -1,0 +1,32 @@
+.why-choose-us-section {
+    padding: 75px 0;
+    background-color: white;
+}
+
+.why-choose-us-heading {
+    margin-bottom: 35px;
+    text-align: center;
+}
+
+.why-choose-us-heading > span {
+    color: var(--primary-color);
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.why-choose-us-heading h2 {
+    margin: 8px 0 10px;
+    font-size: 35px;
+}
+
+.why-choose-us-heading p {
+    color: var(--text-light);
+    font-size: 15px;
+}
+
+.why-choose-us-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}

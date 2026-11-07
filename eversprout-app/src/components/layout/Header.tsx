@@ -23,7 +23,10 @@ export default function Header() {
 
                     <button type="button" className="icon-btn" title="Danh sách yêu thích"><Heart size={20} /></button>
                     <button type="button" className="icon-btn" title="Thông báo"><Bell size={20}/></button>
-                    <button type="button" className="icon-btn" title="Giỏ hàng"><ShoppingCart size={20}/></button>
+
+                    <a href="/cart" className="icon-btn" title="Giỏ hàng">
+                        <ShoppingCart size={20} />
+                    </a>
 
                     <button className="account">
                         <a href="/login">Đăng nhập</a>

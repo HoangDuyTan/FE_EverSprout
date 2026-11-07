@@ -1,9 +1,10 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import "./styles/globals.css";
 import HomePage from "./pages/home/HomePage";
 import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
+
+import "./styles/globals.css";
 
 function App() {
     return (

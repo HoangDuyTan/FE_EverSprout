@@ -1,14 +1,15 @@
 import "../../styles/layout/header.css";
 import {Heart, Bell, ShoppingCart} from "lucide-react";
+import {Link} from "react-router-dom";
 
 export default function Header() {
     return (
         <header className="header">
             <div className="header-main container">
-                <a href="/" className="logo">
+                <Link to="/" className="logo">
                     <strong>EverSprout</strong>
                     <span>Cội nguồn cây giống</span>
-                </a>
+                </Link>
 
                 <form className="search-box">
                     <input type="text" placeholder="Tìm kiếm cây giống bưởi, ổi, bầu, rau sạch..." />
@@ -26,7 +27,7 @@ export default function Header() {
                     <button type="button" className="icon-btn" title="Giỏ hàng"><ShoppingCart size={20}/></button>
 
                     <button className="account">
-                        <a href="/login">Đăng nhập</a>
+                        <Link to="/login">Đăng nhập</Link>
                     </button>
                 </div>
             </div>

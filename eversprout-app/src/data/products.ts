@@ -1,3 +1,6 @@
+import product1 from "../assets/1.webp";
+import product2 from "../assets/2.webp";
+import product3 from "../assets/3.webp";
 
 export interface Product {
     id: number;
@@ -11,6 +14,7 @@ export interface Product {
     reviews: number;
     stock: number;
     tag: string;
+    sold: number;
     propagation: string;
     ecology: string;
     image: string;
@@ -38,9 +42,10 @@ export const products: Product[] = [
         reviews: 128,
         stock: 85,
         tag: "Cây ghép F1",
+        sold: 115,
         propagation: "Ghép cành",
         ecology: "Ưa nắng toàn phần",
-        image: "/products/xoai.jpg",
+        image: product1,
         location: "Tiền Giang",
     },
     {
@@ -55,9 +60,10 @@ export const products: Product[] = [
         reviews: 94,
         stock: 120,
         tag: "Cây chiết cành",
+        sold: 120,
         propagation: "Chiết cành",
         ecology: "Ưa nắng toàn phần",
-        image: "/products/oi.jpg",
+        image: product2,
         location: "Kiên Giang",
     },
     {
@@ -72,9 +78,10 @@ export const products: Product[] = [
         reviews: 210,
         stock: 215,
         tag: "Năng suất khủng",
+        sold: 50,
         propagation: "Ghép cành",
         ecology: "Ưa nắng toàn phần",
-        image: "/products/chanh.jpg",
+        image: product3,
         location: "Đồng Tháp",
     },
     {
@@ -89,9 +96,10 @@ export const products: Product[] = [
         reviews: 177,
         stock: 60,
         tag: "Mắt ghép chuẩn",
+        sold: 180,
         propagation: "Ghép cành",
         ecology: "Ưa nắng toàn phần",
-        image: "/products/buoi.jpg",
+        image: product1,
         location: "Bến Tre",
     },
     {
@@ -106,9 +114,10 @@ export const products: Product[] = [
         reviews: 62,
         stock: 350,
         tag: "Rau mầm hữu cơ",
+        sold: 59,
         propagation: "Ươm hạt",
         ecology: "Ưa nắng toàn phần",
-        image: "/products/cachua.jpg",
+        image: product2,
         location: "Sa Đéc",
     },
     {
@@ -123,9 +132,10 @@ export const products: Product[] = [
         reviews: 89,
         stock: 45,
         tag: "Hương thơm ngát",
+        sold: 87,
         propagation: "Chiết cành",
         ecology: "Chịu hạn tốt",
-        image: "/products/hoahong.jpg",
+        image: product3,
         location: "Bình Dương",
     },
     {
@@ -140,9 +150,10 @@ export const products: Product[] = [
         reviews: 312,
         stock: 50,
         tag: "Giống tuyển F1",
+        sold: 97,
         propagation: "Ghép cành",
         ecology: "Ưa nắng toàn phần",
-        image: "/products/saurieng.jpg",
+        image: product1,
         location: "Đồng Nai",
     },
     {
@@ -157,9 +168,10 @@ export const products: Product[] = [
         reviews: 142,
         stock: 78,
         tag: "Cực kỳ hot",
+        sold: 286,
         propagation: "Ghép cành",
         ecology: "Ưa nắng toàn phần",
-        image: "/products/vusua.jpg",
+        image: product2,
         location: "Bình Phước",
     },
     {
@@ -174,9 +186,10 @@ export const products: Product[] = [
         reviews: 80,
         stock: 400,
         tag: "Gia vị hữu cơ",
+        sold: 76,
         propagation: "Ươm hạt",
         ecology: "Chịu hạn tốt",
-        image: "/products/hungque.jpg",
+        image: product3,
         location: "Bình Dương",
     },
 
@@ -192,9 +205,10 @@ export const products: Product[] = [
         reviews: 95,
         stock: 200,
         tag: "Hữu cơ",
+        sold: 36,
         propagation: "Không áp dụng",
         ecology: "Phù hợp nhiều loại cây",
-        image: "/products/phantrun.jpg",
+        image: product3,
         location: "TP. Hồ Chí Minh",
     },
     {
@@ -209,9 +223,10 @@ export const products: Product[] = [
         reviews: 78,
         stock: 150,
         tag: "Dụng cụ làm vườn",
+        sold: 99,
         propagation: "Không áp dụng",
         ecology: "Phù hợp nhiều loại cây",
-        image: "/products/keo.jpg",
+        image: product1,
         location: "TP. Hồ Chí Minh",
     },
     {
@@ -226,11 +241,11 @@ export const products: Product[] = [
         reviews: 62,
         stock: 300,
         tag: "Kích thích ra rễ",
+        sold: 67,
         propagation: "Không áp dụng",
         ecology: "Phù hợp nhiều loại cây",
-        image: "/products/kichre.jpg",
+        image: product2,
         location: "Đồng Nai",
     },
-
 
 ];

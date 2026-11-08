@@ -133,6 +133,8 @@
 
 .home-hero-image-wrapper {
     position: relative;
+    display: flex;
+    height: 500px;
 }
 
 .home-hero-image {

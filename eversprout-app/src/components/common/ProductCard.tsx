@@ -5,17 +5,21 @@ interface ProductCardProps {
     image: string;
     name: string;
     scientificName?: string;
-    price: string;
+    price: number;
+    oldPrice?: number;
     rating: number;
-    sold: number;
+    reviews?: number;
+    sold?: number;
     tag?: string;
+    stock?: number;
+    origin?: string;
 }
 
-export default function ProductCard({image, name, scientificName, price, rating, sold, tag}: ProductCardProps) {
+export default function ProductCard({image, name, scientificName, price, oldPrice, rating, reviews, sold, tag, stock, origin}: ProductCardProps) {
     return (
         <article className="product-card">
             <div className="product-card-image-wrapper">
-                <img src={image} alt={name} className="product-card-image"/>
+                <img src={image} alt={name} className="product-card-image" loading="lazy"/>
                 {tag && (<span className="product-card-tag">{tag}</span>)}
                 <button type="button" className="product-card-favorite" aria-label="Thêm vào yêu thích"><Heart size={17}/></button>
             </div>
@@ -32,7 +36,7 @@ export default function ProductCard({image, name, scientificName, price, rating,
                 {scientificName && (<p>{scientificName}</p>)}
 
                 <div className="product-card-bottom">
-                    <strong>{price}</strong>
+                    <strong>{price}đ</strong>
                     <button type="button"><ShoppingCart size={14}/>Mua</button>
                 </div>
             </div>

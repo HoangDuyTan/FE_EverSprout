@@ -1,15 +1,19 @@
+import { NavLink } from "react-router-dom";
 import "../../styles/layout/navbar.css";
 
 export default function Navbar() {
+    const getNavClass = ({ isActive }: { isActive: boolean }) =>
+        isActive ? "navbar-link active" : "navbar-link";
+
     return (
         <nav className="site-navbar">
             <div className="container navbar-content">
-                <a href="/" className="navbar-link active">Trang chủ</a>
-                <a href="/products" className="navbar-link">Sản phẩm</a>
-                <a href="/categories" className="navbar-link">Danh mục</a>
-                <a href="/about" className="navbar-link">Giới thiệu</a>
-                <a href="/guides" className="navbar-link">Cẩm nang trồng trọt</a>
-                <a href="/contact" className="navbar-link">Liên hệ</a>
+                <NavLink to="/" end className={getNavClass}>Trang chủ</NavLink>
+                <NavLink to="/products" className={getNavClass}>Sản phẩm</NavLink>
+                <NavLink to="/categories" className={getNavClass}>Danh mục</NavLink>
+                <NavLink to="/about" className={getNavClass}>Giới thiệu</NavLink>
+                <NavLink to="/guides" className={getNavClass}>Cẩm nang trồng trọt</NavLink>
+                <NavLink to="/contact" className={getNavClass}>Liên hệ</NavLink>
             </div>
         </nav>
     );

@@ -1,5 +1,6 @@
 import {ArrowRight, BookOpen, CircleCheck} from "lucide-react";
 import "../../../styles/pages/home/hero-section.css"
+import product1 from "../../../assets/1.webp";
 
 export default function HeroSection() {
     return (
@@ -52,7 +53,7 @@ export default function HeroSection() {
                 </div>
 
                 <div className="home-hero-image-wrapper">
-                    <img src="../../../assets/hero.png" alt="Cây giống EverSprout" className="home-hero-image"/>
+                    <img src={product1} alt="Cây giống EverSprout" className="home-hero-image"/>
 
                     <div className="home-hero-organic">
                         <span>Ươm tự nhiên</span>

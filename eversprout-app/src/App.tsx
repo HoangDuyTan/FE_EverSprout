@@ -6,6 +6,7 @@ import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
 
 import "./styles/globals.css";
 import ProductListingPage from "./pages/products/ProductListingPage.tsx";
+import AboutPage from "./pages/about/AboutPage.tsx";
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                 <Route path="/forgot-password" element={<ForgotPasswordPage />} />
 
                 <Route path="/products" element={<ProductListingPage/>} />
+                <Route path="/about" element={<AboutPage/>}/>
                 <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
         </BrowserRouter>

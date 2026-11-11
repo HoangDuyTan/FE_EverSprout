@@ -1,5 +1,6 @@
 import {Heart, ShoppingCart, Star} from "lucide-react";
 import "../../styles/common/product-card.css"
+import {addProductToCart} from "../../data/cart.ts";
 
 interface ProductCardProps {
     image: string;

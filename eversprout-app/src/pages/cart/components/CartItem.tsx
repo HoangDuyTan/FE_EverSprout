@@ -50,6 +50,7 @@ function CartItem({item, onIncrease, onDecrease, onRemove, }: Props) {
                 <button
                     type="button"
                     onClick={() => onIncrease(product.id)}
+                    disabled={item.quantity >= product.stock}
                 >
                     +
                 </button>

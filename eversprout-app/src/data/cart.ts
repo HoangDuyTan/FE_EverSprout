@@ -14,7 +14,8 @@ export function getCart(): CartItem[] {
     }
 
     try {
-        return JSON.parse(data) as CartItem[];
+        const cart = JSON.parse(data);
+        return Array.isArray(cart) ? cart : [];
     } catch {
         return [];
     }
@@ -23,6 +24,7 @@ export function getCart(): CartItem[] {
 //Lưu cart vào localStorage
 export function saveCart(cart: CartItem[]) {
     localStorage.setItem("eversprout-cart", JSON.stringify(cart));
+    window.dispatchEvent(new Event("cart-updated"));
 }
 
 // add 1sp to cart

@@ -6,10 +6,12 @@ interface ProductGridProps {
     products: Product[];
 }
 
-export default function ProductGrid({products}: ProductGridProps){
+export default function ProductGrid({ products, }: ProductGridProps) {
     if (products.length === 0) {
         return (
-            <div className="product-empty">Không tìm thấy sản phẩm phù hợp.</div>
+            <div className="product-empty">
+                Không tìm thấy sản phẩm phù hợp.
+            </div>
         );
     }
 
@@ -18,6 +20,7 @@ export default function ProductGrid({products}: ProductGridProps){
             {products.map((product) => (
                 <ProductCard
                     key={product.id}
+                    id={product.id}
                     image={product.image}
                     name={product.name}
                     scientificName={product.scientificName}

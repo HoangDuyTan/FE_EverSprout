@@ -28,6 +28,14 @@ function CartPage() {
 
     //tăng sluongF
     function increaseQuantity(id: number) {
+        const selectedItem = cart.find((item) => item.product.id === id  );
+        if (!selectedItem) {
+            return;
+        }
+        if (selectedItem.quantity >= selectedItem.product.stock) {
+            setMessage("Sản phẩm đã đạt giới hạn tồn kho.");
+            return;
+        }
         const newCart = cart.map((item) => {
             if (item.product.id === id) {
                 return {
@@ -37,6 +45,7 @@ function CartPage() {
             return item;
         });
         setCart(newCart);
+        setMessage("Đã tăng số lượng sản phẩm.");
     }
 
     // giảm sluong
@@ -49,14 +58,15 @@ function CartPage() {
             }
             return item;
         });
-
         setCart(newCart);
+        setMessage("Đã giảm số lượng sản phẩm.");
     }
 
     //xóa sp
     function removeItem(id: number) {
         const newCart = cart.filter((item) => item.product.id !== id);
         setCart(newCart);
+        setMessage("Đã xóa sản phẩm khỏi giỏ hàng.");
     }
 
     // them sp mua kèm
@@ -159,7 +169,10 @@ function CartPage() {
                     </div>
                     {/* Tbao hành động */}
                     {message && (
-                        <p className="cart-message" role="status"> {message} </p>
+                        <div className="cart-message" role="status">
+                            <span>{message}</span>
+                            <button  type="button" onClick={() => setMessage("")} aria-label="Đóng thông báo"> × </button>
+                        </div>
                     )}
 
                     <div className="cart-layout">
@@ -209,10 +222,10 @@ function CartPage() {
                         {/* Column right */}
                         <div className="cart-right">
                             <CartSummary subtotal={subtotal}
-                                shipping={shipping}
-                                discount={discount}
-                                total={total}
-                                onCheckout={checkout} />
+                                         shipping={shipping}
+                                         discount={discount}
+                                         total={total}
+                                         onCheckout={checkout} />
 
                             <div className="cart-help">
                                 <h3>Cần hướng dẫn trồng cây?</h3>

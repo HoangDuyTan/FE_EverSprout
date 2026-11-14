@@ -251,6 +251,17 @@
     border-radius: 8px;
     padding: 14px;
     margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+.cart-message button {
+    border: none;
+    background: transparent;
+    color: #116b2c;
+    font-size: 22px;
+    cursor: pointer;
 }
 /*Sp gợi ý */
 .cart-recommendations {
@@ -400,4 +411,7 @@
     font-size: 12px;
     line-height: 1.6;
 }
-
+.cart-quantity button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}

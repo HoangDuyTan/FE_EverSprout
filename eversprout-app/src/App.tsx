@@ -3,7 +3,6 @@ import HomePage from "./pages/home/HomePage";
 import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
-import CartPage from "./pages/cart/CartPage.tsx";
 
 import "./styles/globals.css";
 import ProductListingPage from "./pages/products/ProductListingPage.tsx";
@@ -23,7 +22,6 @@ function App() {
 
                 <Route path="/products" element={<ProductListingPage/>} />
                 <Route path="/about" element={<AboutPage/>}/>
-                <Route path="/cart" element={<CartPage/>}/>
                 <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
 

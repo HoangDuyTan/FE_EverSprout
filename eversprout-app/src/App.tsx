@@ -3,11 +3,12 @@ import HomePage from "./pages/home/HomePage";
 import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
-
-import "./styles/globals.css";
 import ProductListingPage from "./pages/products/ProductListingPage.tsx";
 import AboutPage from "./pages/about/AboutPage.tsx";
 import ChatbotWidget from "./components/common/ChatbotWidget.tsx";
+import PaymentPage from "./pages/payment/PaymentPage.tsx";
+
+import "./styles/globals.css";
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
 
                 <Route path="/products" element={<ProductListingPage/>} />
                 <Route path="/about" element={<AboutPage/>}/>
+                <Route path="/payment" element={<PaymentPage/>}/>
                 <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
 

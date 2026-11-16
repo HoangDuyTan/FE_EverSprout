@@ -415,3 +415,7 @@
     opacity: 0.4;
     cursor: not-allowed;
 }
+.recommendation-card button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

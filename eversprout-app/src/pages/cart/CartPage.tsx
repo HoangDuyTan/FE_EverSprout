@@ -72,6 +72,11 @@ function CartPage() {
     // them sp mua kèm
     function addItem(product: Product) {
         const existingItem = cart.find( (item) => item.product.id === product.id);
+        if (product.stock <= 0 || (existingItem && existingItem.quantity >= product.stock)) {
+            setMessage("Sản phẩm đã đạt giới hạn tồn kho.");
+            return;
+        }
+
         if (existingItem) {
             const newCart = cart.map((item) => {
                 if (item.product.id === product.id) {
@@ -217,7 +222,7 @@ function CartPage() {
                             </div>
 
                             {/*Gợi ý sp */}
-                            <CartRecommendations onAdd={addItem}/>
+                            <CartRecommendations cart={cart} onAdd={addItem}/>
                         </div>
                         {/* Column right */}
                         <div className="cart-right">

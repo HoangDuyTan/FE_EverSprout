@@ -11,6 +11,7 @@ import GuidePage from "./pages/guides/GuidePage.tsx";
 import GuideDetailPage from "./pages/guides/GuideDetailPage.tsx";
 import ContactPage from "./pages/contact/ContactPage.tsx";
 import ChatbotWidget from "./components/common/ChatbotWidget.tsx";
+import CartPage from "./pages/cart/CartPage";
 
 function App() {
     return (
@@ -24,6 +25,7 @@ function App() {
                 <Route path="/forgot-password" element={<ForgotPasswordPage />} />
 
                 <Route path="/products" element={<ProductListingPage/>} />
+                <Route path="/cart" element={<CartPage />} />
                 <Route path="/about" element={<AboutPage/>}/>
                 <Route path="/guides" element={<GuidePage/>}/>
                 <Route path="/guides/:id" element={<GuideDetailPage/>}/>

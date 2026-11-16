@@ -1,4 +1,5 @@
-import {useMemo, useState} from "react";
+import {useMemo, useState, useEffect} from "react";
+import {useSearchParams} from "react-router-dom";
 
 import Header from "../../components/layout/Header";
 import Navbar from "../../components/layout/Navbar";
@@ -16,11 +17,27 @@ import "../../styles/pages/products/product-listing-page.css";
 const PRODUCTS_PER_PAGE = 6;
 
 export default function ProductListingPage() {
+    const [searchParams, setSearchParams] = useSearchParams();
+    const searchParam = searchParams.get("search") || "";
+    const categoryParam = searchParams.get("category") || "";
+
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
     const [priceRange, setPriceRange] = useState("all");
     const [sortOption, setSortOption] = useState("best-selling");
     const [currentPage, setCurrentPage] = useState(1);
+
+    useEffect(() => {
+        setSearchTerm(searchParam);
+
+        if (categoryParam) {
+            setSelectedCategories([categoryParam]);
+        } else {
+            setSelectedCategories([]);
+        }
+
+        setCurrentPage(1);
+    }, [searchParam, categoryParam]);
 
     const filteredProducts = useMemo(() => {
         let res = [...products];
@@ -124,6 +141,7 @@ export default function ProductListingPage() {
         setPriceRange("all");
         setSortOption("best-selling");
         setCurrentPage(1);
+        setSearchParams({});
     };
 
     return (

@@ -1,14 +1,39 @@
+import {useEffect, useState} from "react";
 import {ArrowRight, BookOpen, CircleCheck} from "lucide-react";
-import "../../../styles/pages/home/hero-section.css"
-import product1 from "../../../assets/1.webp";
+import {Link} from "react-router-dom";
+
+import "../../../styles/pages/home/hero-section.css";
+
+import img1 from "../../../assets/1.webp";
+import img2 from "../../../assets/2.webp";
+import img3 from "../../../assets/3.webp";
 
 export default function HeroSection() {
+    const [activeImg, setActiveImg] = useState(0);
+    const heroImgs = [img1, img2, img3];
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setActiveImg((current) => current === heroImgs.length - 1 ? 0 : current + 1);
+        }, 4500);
+
+        return () => clearInterval(timer);
+    }, []);
+
     return (
         <section className="home-hero">
+            <div className="home-hero-bg">
+                {heroImgs.map((img, index) => (
+                    <img key={img} src={img} alt="" className={activeImg === index ? "active" : ""}/>
+                ))}
+            </div>
+
+            <div className="home-hero-overlay"/>
+
             <div className="container home-hero-inner">
                 <div className="home-hero-content">
                     <span className="home-hero-label">
-                        <CircleCheck size={14} />
+                        <CircleCheck size={14}/>
                         Chuẩn vườn ươm sinh thái F1
                     </span>
 
@@ -21,17 +46,9 @@ export default function HeroSection() {
                     </p>
 
                     <div className="home-hero-actions">
-                        <a href="/products" className="home-hero-primary-button">Khám phá cây giống<ArrowRight size={17} /></a>
-                        <a href="/guides" className="home-hero-secondary-button"><BookOpen size={17} />Cẩm nang chăm sóc</a>
-                    </div>
-
-                    <div className="home-hero-keywords">
-                        <span>Tìm kiếm nhanh:</span>
-
-                        <button type="button">Cây ăn trái</button>
-                        <button type="button">Ổi Ruby</button>
-                        <button type="button">Bưởi da xanh</button>
-                        <button type="button">Giao cây tận nhà</button>
+                        <Link to="/products" className="home-hero-primary-btn">Khám phá cây giống<ArrowRight size={17}/></Link>
+                        <Link to="/guides" className="home-hero-secondary-btn"><BookOpen size={17}/>Cẩm nang chăm
+                            sóc</Link>
                     </div>
 
                     <div className="home-hero-stats">
@@ -50,22 +67,22 @@ export default function HeroSection() {
                             <span>Giao bọc ẩm</span>
                         </div>
                     </div>
-                </div>
 
-                <div className="home-hero-image-wrapper">
-                    <img src={product1} alt="Cây giống EverSprout" className="home-hero-image"/>
+                    <div className="home-hero-guarantee">
+                        <CircleCheck size={22}/>
 
-                    <div className="home-hero-organic">
-                        <span>Ươm tự nhiên</span>
-                        <strong>100% Hữu cơ</strong>
-                    </div>
-
-                    <div className="home-hero-guarantee"><CircleCheck size={22} />
                         <div>
                             <strong>Cam kết nguồn giống chuẩn</strong>
                             <p>Bảo hiểm 1 đổi 1 nếu mầm sinh trưởng không đạt.</p>
                         </div>
                     </div>
+                </div>
+
+                <div className="home-hero-dots">
+                    {heroImgs.map((_, index) => (
+                        <button key={index} type="button" className={activeImg === index ? "active" : ""}
+                                onClick={() => setActiveImg(index)} aria-label={`Ảnh ${index + 1}`}/>
+                    ))}
                 </div>
             </div>
         </section>

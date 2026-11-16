@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import {useMemo, useState} from "react";
 
 import Header from "../../components/layout/Header";
 import Navbar from "../../components/layout/Navbar";
@@ -7,9 +7,9 @@ import Footer from "../../components/layout/Footer";
 import ProductToolbar from "./components/ProductToolbar";
 import ProductSidebar from "./components/ProductSidebar";
 import ProductGrid from "./components/ProductGrid";
-import ProductPagination from "./components/ProductPagination";
+import Pagination from "../../components/common/Pagination";
 
-import { products } from "../../data/products";
+import {products} from "../../data/products";
 
 import "../../styles/pages/products/product-listing-page.css";
 
@@ -128,8 +128,8 @@ export default function ProductListingPage() {
 
     return (
         <>
-            <Header />
-            <Navbar />
+            <Header/>
+            <Navbar/>
 
             <main className="product-listing-page">
                 <div className="container">
@@ -161,17 +161,17 @@ export default function ProductListingPage() {
                         <div className="product-page-main">
                             <ProductGrid products={currentProducts}/>
 
-                            <ProductPagination
-                                currentPage={currentPage}
+                            <Pagination
+                                page={currentPage}
                                 totalPages={totalPages}
-                                onPageChange={setCurrentPage}
+                                onChange={setCurrentPage}
                             />
                         </div>
                     </div>
                 </div>
             </main>
 
-            <Footer />
+            <Footer/>
         </>
     );
 }

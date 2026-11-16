@@ -8,6 +8,7 @@ import "./styles/globals.css";
 import ProductListingPage from "./pages/products/ProductListingPage.tsx";
 import AboutPage from "./pages/about/AboutPage.tsx";
 import GuidePage from "./pages/guides/GuidePage.tsx";
+import GuideDetailPage from "./pages/guides/GuideDetailPage.tsx";
 import ChatbotWidget from "./components/common/ChatbotWidget.tsx";
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
                 <Route path="/products" element={<ProductListingPage/>} />
                 <Route path="/about" element={<AboutPage/>}/>
                 <Route path="/guides" element={<GuidePage/>}/>
+                <Route path="/guides/:id" element={<GuideDetailPage/>}/>
                 <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
 

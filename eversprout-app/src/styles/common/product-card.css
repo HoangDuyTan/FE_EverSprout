@@ -8,7 +8,6 @@
     border: 1px solid var(--text-light);
     border-radius: 10px;
     background-color: white;
-    cursor: pointer;
 }
 
 .product-card:hover {
@@ -21,7 +20,6 @@
     border: 2px solid var(--primary-dark);
     border-radius: 10px;
     background-color: white;
-    cursor: pointer;
 }
 
 .product-card-image-wrapper {

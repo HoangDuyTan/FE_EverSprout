@@ -1,6 +1,7 @@
 import {Clock, Eye} from "lucide-react";
 import type {Guide} from "../../../data/guides";
 import "../../../styles/pages/guides/guide-card.css";
+import {Link} from "react-router-dom"
 
 interface GuideCardProps {
     guide: Guide;
@@ -23,7 +24,7 @@ export default function GuideCard({guide}: GuideCardProps) {
                     <span><Eye size={14}/>{guide.views}</span>
                 </div>
 
-                <button type="button" className="guide-card-btn">Xem hướng dẫn</button>
+                <Link to={`/guides/${guide.id}`} className="guide-card-btn">Xem hướng dẫn</Link>
             </div>
         </article>
     );

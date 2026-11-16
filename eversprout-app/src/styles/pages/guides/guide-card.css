@@ -14,9 +14,7 @@
     border: 2px solid var(--primary-color);
     border-radius: 10px;
     background-color: white;
-    cursor: pointer;
 }
-
 
 .guide-card-img {
     position: relative;
@@ -86,6 +84,9 @@
 .guide-card-btn {
     width: 100%;
     height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-top: auto;
     border: none;
     border-radius: 6px;

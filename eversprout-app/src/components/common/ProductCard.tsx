@@ -1,7 +1,7 @@
 import {Heart, ShoppingCart, Star} from "lucide-react";
 import "../../styles/common/product-card.css"
 import {getCart,addProductToCart,formatPrice,} from "../../data/cart.ts";
-import { useNavigate } from "react-router-dom";
+import {Link,useNavigate } from "react-router-dom";
 import { products } from "../../data/products";
 
 interface ProductCardProps {
@@ -73,7 +73,7 @@ export default function ProductCard({id,image, name, scientificName, price, oldP
                     <strong>{rating}</strong>
                     <span>({sold})</span>
                 </div>
-                <h3>{name}</h3>
+                <h3> <Link to={`/products/${id}`}>{name}</Link></h3>
                 {scientificName && <p>{scientificName}</p>}
                 <div className="product-card-bottom">
                     <strong>{formatPrice(price)}</strong>

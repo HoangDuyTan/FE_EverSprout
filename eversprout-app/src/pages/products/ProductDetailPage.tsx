@@ -4,6 +4,8 @@ import Navbar from "../../components/layout/Navbar";
 import Footer from "../../components/layout/Footer";
 import { products } from "../../data/products";
 import { formatPrice } from "../../data/cart";
+import ProductGallery from "./components/ProductGallery";
+import "../../styles/pages/products/product-detail-page.css";
 
 export default function ProductDetailPage() {
     const { id } = useParams(); //laays id tu url
@@ -30,9 +32,14 @@ export default function ProductDetailPage() {
                                 <span> / {product.name}</span>
                             </div>
                             <section className="product-detail-main">
-                                <div className="product-detail-gallery">
-                                    <img src={product.image} alt={product.name}/>
-                                </div>
+                                <ProductGallery images={[{src:product.image , label:"Tổng thể"}]}
+                                                productName={product.name}
+                                                tag={product.tag}
+                                                origin={product.origin}
+                                                propagation={product.propagation}
+                                                ecology={product.ecology}
+                                />
+
                                 <div className="product-detail-info">
                                     <span>{product.category}</span>
                                     <h1>{product.name}</h1>

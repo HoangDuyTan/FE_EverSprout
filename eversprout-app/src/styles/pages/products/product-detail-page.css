@@ -1,0 +1,97 @@
+.product-detail-page {
+    min-height: 100vh;
+    padding: 24px 0 72px;
+    background-color: var(--section-background);
+}
+.product-detail-breadcrumb {
+    margin-bottom: 24px;
+    color: var(--text-light);
+    font-size: 14px;
+}
+.product-detail-main {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 40px;
+    align-items: start;
+}
+.product-detail-gallery,
+.product-detail-info {
+    min-width: 0;
+}
+
+/*ảnh main*/
+.product-gallery-main {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: white;
+}
+.product-gallery-main img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.product-gallery-tag {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    padding: 8px 14px;
+    border-radius: 20px;
+    color: white;
+    background-color: var(--primary-dark);
+    font-size: 13px;
+    font-weight: 600;
+}
+/*thumbnail*/
+.product-gallery-thumbnails {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr)); /*chia kvực thumbnail thành bốn cột bằng nhau*/
+    gap: 12px;
+    margin-top: 16px;
+}
+.product-gallery-thumbnail {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    background-color: white;
+    padding: 0;
+}
+.product-gallery-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.product-gallery-thumbnail span {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 6px;
+    background-color: rgba(0, 0, 0, 0.55);
+    color: white;
+    font-size: 11px;
+    text-align: center;
+}
+.product-gallery-thumbnail.active {
+    border-color: var(--primary-dark);
+}
+.product-gallery-thumbnail:hover {
+    border-color: var(--primary-color);
+}
+/*ttin còn lại*/
+.product-gallery-features {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+    padding: 16px;
+    border-radius: 12px;
+    background-color: #eef3ff;
+    color: var(--primary-dark);
+    font-size: 12px;
+}

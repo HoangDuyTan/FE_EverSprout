@@ -7,6 +7,7 @@ import ProductListingPage from "./pages/products/ProductListingPage.tsx";
 import AboutPage from "./pages/about/AboutPage.tsx";
 import ChatbotWidget from "./components/common/ChatbotWidget.tsx";
 import PaymentPage from "./pages/payment/PaymentPage.tsx";
+import ProfilePage from "./pages/profile/ProfilePage.tsx";
 
 import "./styles/globals.css";
 
@@ -24,6 +25,7 @@ function App() {
                 <Route path="/products" element={<ProductListingPage/>} />
                 <Route path="/about" element={<AboutPage/>}/>
                 <Route path="/payment" element={<PaymentPage/>}/>
+                <Route path="/profile" element={<ProfilePage/>}/>
                 <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
 

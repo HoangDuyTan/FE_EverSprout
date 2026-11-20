@@ -14,6 +14,7 @@ export default function Navbar() {
                 <NavLink to="/about" className={getNavClass}>Giới thiệu</NavLink>
                 <NavLink to="/guides" className={getNavClass}>Cẩm nang trồng trọt</NavLink>
                 <NavLink to="/payment" className={getNavClass}>Thanh toán</NavLink>
+                <NavLink to="/profile" className={getNavClass}>Tài khoản</NavLink>
                 <NavLink to="/contact" className={getNavClass}>Liên hệ</NavLink>
             </div>
         </nav>

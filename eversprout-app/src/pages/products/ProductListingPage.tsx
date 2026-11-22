@@ -28,6 +28,8 @@ export default function ProductListingPage() {
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
     const [priceRange, setPriceRange] = useState("all");
+    const [stockStatus, setStockStatus] = useState("all");
+    const [ratingFilter, setRatingFilter] = useState("all");
     const [sortOption, setSortOption] = useState("best-selling");
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -90,6 +92,22 @@ export default function ProductListingPage() {
             res = res.filter((product) => product.price > 100000);
         }
 
+        if (stockStatus === "in-stock") {
+            res = res.filter((product) => product.stock > 50);
+        }
+
+        if (stockStatus === "low-stock") {
+            res = res.filter((product) => product.stock > 0 && product.stock <= 50);
+        }
+
+        if (ratingFilter === "4.8-plus") {
+            res = res.filter((product) => product.rating >= 4.8);
+        }
+
+        if (ratingFilter === "5-star") {
+            res = res.filter((product) => product.rating === 5);
+        }
+
         // Sort
         if (sortOption === "best-selling") {
             res.sort((a, b) => b.sold - a.sold);
@@ -117,6 +135,8 @@ export default function ProductListingPage() {
         searchTerm,
         selectedCategories,
         priceRange,
+        stockStatus,
+        ratingFilter,
         sortOption
     ]);
 
@@ -153,10 +173,22 @@ export default function ProductListingPage() {
         setCurrentPage(1);
     };
 
+    const handleStockChange = (value: string) => {
+        setStockStatus(value);
+        setCurrentPage(1);
+    };
+
+    const handleRatingChange = (value: string) => {
+        setRatingFilter(value);
+        setCurrentPage(1);
+    };
+
     const handleResetFilters = () => {
         setSearchTerm("");
         setSelectedCategories([]);
         setPriceRange("all");
+        setStockStatus("all");
+        setRatingFilter("all");
         setSortOption("best-selling");
         setCurrentPage(1);
         setSearchParams({});
@@ -189,8 +221,12 @@ export default function ProductListingPage() {
                         <ProductSidebar
                             selectedCategories={selectedCategories}
                             priceRange={priceRange}
+                            stockStatus={stockStatus}
+                            ratingFilter={ratingFilter}
                             onCategoryChange={handleCategoryChange}
                             onPriceChange={handlePriceChange}
+                            onStockChange={handleStockChange}
+                            onRatingChange={handleRatingChange}
                             onReset={handleResetFilters}
                         />
 

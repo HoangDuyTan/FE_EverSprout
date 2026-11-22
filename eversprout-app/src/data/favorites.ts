@@ -34,3 +34,7 @@ export function toggleFavorite(productId: number) {
     saveFavorites([...favorites, productId]);
     return true;
 }
+
+export function clearFavorites() {
+    saveFavorites([]);
+}

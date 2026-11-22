@@ -7,7 +7,7 @@ import ProductSidebar from "../products/components/ProductSidebar";
 import ProductGrid from "../products/components/ProductGrid";
 import Pagination from "../../components/common/Pagination";
 import type {Product} from "../../data/products";
-import {getFavorites} from "../../data/favorites";
+import {clearFavorites, getFavorites} from "../../data/favorites";
 import {getProducts} from "../../service/productService";
 import "../../styles/pages/products/product-listing-page.css";
 import "../../styles/pages/favorites/favorites-page.css";
@@ -151,6 +151,11 @@ export default function FavoritesPage() {
         setCurrentPage(1);
     };
 
+    const handleClearFavorites = () => {
+        clearFavorites();
+        handleResetFilters();
+    };
+
     return (
         <>
             <Header/>
@@ -163,7 +168,13 @@ export default function FavoritesPage() {
                             <span>Danh sách của bạn</span>
                             <h1>Sản phẩm yêu thích</h1>
                         </div>
-                        <strong>{filteredProducts.length} sản phẩm</strong>
+
+                        {favoriteProducts.length > 0 && (
+                            <div className="favorites-heading-actions">
+                                <strong>{favoriteProducts.length} sản phẩm yêu thích</strong>
+                                <button type="button" onClick={handleClearFavorites}>Xóa tất cả</button>
+                            </div>
+                        )}
                     </div>
 
                     {loading ? (
@@ -172,7 +183,8 @@ export default function FavoritesPage() {
                         <div className="favorites-empty">{error}</div>
                     ) : favoriteProducts.length === 0 ? (
                         <div className="favorites-empty">
-                            Bạn chưa có sản phẩm yêu thích.
+                            <h2>Danh sách yêu thích đang trống</h2>
+                            <p>Hãy thêm những sản phẩm bạn quan tâm để xem lại nhanh hơn.</p>
                         </div>
                     ) : (
                         <>

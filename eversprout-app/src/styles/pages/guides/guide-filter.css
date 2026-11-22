@@ -4,6 +4,8 @@
     border: 1px solid var(--border-color);
     border-radius: 10px;
     background-color: white;
+    position: sticky;
+    top: 130px;
 }
 
 .guide-filter h3 {

@@ -116,7 +116,7 @@
     background-color: var(--primary-light);
 }
 /* Sluong sp trên icon cart header */
-.cart-link {
+.cart-link, .favorite-link {
     position: relative;
 }
 .cart-badge {

@@ -3,31 +3,37 @@ import {Heart, Bell, ShoppingCart} from "lucide-react";
 import {Link, useNavigate} from "react-router-dom";
 import {FormEvent, useEffect, useState} from "react";
 import {getCart} from "../../data/cart";
+import {getFavorites} from "../../data/favorites";
 
 export default function Header() {
     const [cartCount, setCartCount] = useState(0);
+    const [favoriteCount, setFavoriteCount] = useState(0);
     const [search, setSearch] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
-        function updateCartCount() {
+        function updateHeaderCount() {
             const cart = getCart();
             const total = cart.reduce((sum, item) => {
                 return sum + item.quantity;
             }, 0);
+
             setCartCount(total);
+            setFavoriteCount(getFavorites().length);
         }
 
         //reload sluong header
-        updateCartCount();
-        //Update khi giỏ han thay đổi
-        window.addEventListener("cart-updated", updateCartCount);
+        updateHeaderCount();
+        //Update khi giỏ hang hoặc yêu thích thay đổi
+        window.addEventListener("cart-updated", updateHeaderCount);
+        window.addEventListener("favorites-updated", updateHeaderCount);
         //Update khi thay đổi ở tab khác
-        window.addEventListener("storage", updateCartCount);
+        window.addEventListener("storage", updateHeaderCount);
 
         return () => {
-            window.removeEventListener("cart-updated", updateCartCount);
-            window.removeEventListener("storage", updateCartCount);
+            window.removeEventListener("cart-updated", updateHeaderCount);
+            window.removeEventListener("favorites-updated", updateHeaderCount);
+            window.removeEventListener("storage", updateHeaderCount);
         };
     }, []);
 
@@ -61,7 +67,8 @@ export default function Header() {
                         <span>Hotline tư vấn</span>
                         <strong>1900 6868</strong>
                     </div>
-                    <button type="button" className="icon-btn" title="Danh sách yêu thích"><Heart size={20}/></button>
+
+                    <Link to="/favorites" className="icon-btn favorite-link" title="Danh sách yêu thích"><Heart size={20}/></Link>
                     <button type="button" className="icon-btn" title="Thông báo"><Bell size={20}/></button>
                     <Link to="/cart" className="icon-btn cart-link" title="Giỏ hàng">
                         <ShoppingCart size={20}/>

@@ -2,7 +2,7 @@ import {BadgeCheck, Headphones, HeartHandshake, Leaf, ShieldCheck, Sprout} from 
 import Header from "../../components/layout/Header";
 import Navbar from "../../components/layout/Navbar";
 import Footer from "../../components/layout/Footer";
-import aboutImage from "../../assets/1.webp";
+import {imageUrls} from "../../data/imageUrls";
 import "../../styles/pages/about/about-page.css";
 
 export default function AboutPage() {
@@ -29,7 +29,7 @@ export default function AboutPage() {
                 <section className="about-story">
                     <div className="container about-story-grid">
                         <div className="about-story-image">
-                            <img src={aboutImage} alt="Vườn ươm EverSprout"/>
+                            <img src={imageUrls.guava} alt="Vườn ươm EverSprout"/>
                         </div>
 
                         <div className="about-story-content">

@@ -2,32 +2,13 @@ import {Heart, ShoppingCart, Star} from "lucide-react";
 import "../../styles/common/product-card.css"
 import {getCart,addProductToCart,formatPrice,} from "../../data/cart.ts";
 import {Link,useNavigate } from "react-router-dom";
-import { products } from "../../data/products";
+import type {Product} from "../../data/products";
 
-interface ProductCardProps {
-    id: number;
-    image: string;
-    name: string;
-    scientificName?: string;
-    price: number;
-    oldPrice?: number;
-    rating: number;
-    reviews?: number;
-    sold?: number;
-    tag?: string;
-    stock?: number;
-    origin?: string;
-}
-
-export default function ProductCard({id,image, name, scientificName, price, oldPrice, rating, reviews, sold, tag, stock, origin}: ProductCardProps) {
+export default function ProductCard(product: Product) {
+    const {id,image, name, scientificName, price, rating, sold, tag, stock} = product;
     const navigate = useNavigate();
 
     function handleAddToCart() {
-        const product = products.find((item) => item.id === id);
-        if (!product) {
-            alert("Không tìm thấy sản phẩm.");
-            return false;
-        }
         if (product.stock <= 0) {
             alert("Sản phẩm đã hết hàng.");
             return false;

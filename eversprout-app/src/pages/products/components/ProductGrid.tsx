@@ -18,21 +18,7 @@ export default function ProductGrid({ products, }: ProductGridProps) {
     return (
         <div className="product-grid">
             {products.map((product) => (
-                <ProductCard
-                    key={product.id}
-                    id={product.id}
-                    image={product.image}
-                    name={product.name}
-                    scientificName={product.scientificName}
-                    price={product.price}
-                    oldPrice={product.oldPrice}
-                    rating={product.rating}
-                    reviews={product.reviews}
-                    sold={product.sold}
-                    tag={product.tag}
-                    stock={product.stock}
-                    origin={product.origin}
-                />
+                <ProductCard key={product.id} {...product}/>
             ))}
         </div>
     );

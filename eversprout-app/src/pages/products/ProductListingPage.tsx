@@ -10,7 +10,8 @@ import ProductSidebar from "./components/ProductSidebar";
 import ProductGrid from "./components/ProductGrid";
 import Pagination from "../../components/common/Pagination";
 
-import {products} from "../../data/products";
+import type {Product} from "../../data/products";
+import {getProducts} from "../../service/productService";
 
 import "../../styles/pages/products/product-listing-page.css";
 
@@ -21,11 +22,27 @@ export default function ProductListingPage() {
     const searchParam = searchParams.get("search") || "";
     const categoryParam = searchParams.get("category") || "";
 
+    const [products, setProducts] = useState<Product[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
     const [priceRange, setPriceRange] = useState("all");
     const [sortOption, setSortOption] = useState("best-selling");
     const [currentPage, setCurrentPage] = useState(1);
+
+    useEffect(() => {
+        getProducts()
+            .then((data) => {
+                setProducts(data);
+            })
+            .catch(() => {
+                setError("Không thể tải danh sách sản phẩm.");
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    }, []);
 
     useEffect(() => {
         setSearchTerm(searchParam);
@@ -96,6 +113,7 @@ export default function ProductListingPage() {
 
         return res;
     }, [
+        products,
         searchTerm,
         selectedCategories,
         priceRange,
@@ -157,7 +175,7 @@ export default function ProductListingPage() {
                             <h1>Cây giống khỏe thuần chủng F1</h1>
                         </div>
 
-                        <span className="product-count">{filteredProducts.length} sản phẩm</span>
+                        <span className="product-count">{loading ? "Đang tải..." : `${filteredProducts.length} sản phẩm`}</span>
                     </div>
 
                     <ProductToolbar
@@ -177,13 +195,21 @@ export default function ProductListingPage() {
                         />
 
                         <div className="product-page-main">
-                            <ProductGrid products={currentProducts}/>
+                            {loading ? (
+                                <div className="product-empty">Đang tải sản phẩm...</div>
+                            ) : error ? (
+                                <div className="product-empty">{error}</div>
+                            ) : (
+                                <>
+                                    <ProductGrid products={currentProducts}/>
 
-                            <Pagination
-                                page={currentPage}
-                                totalPages={totalPages}
-                                onChange={setCurrentPage}
-                            />
+                                    <Pagination
+                                        page={currentPage}
+                                        totalPages={totalPages}
+                                        onChange={setCurrentPage}
+                                    />
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>

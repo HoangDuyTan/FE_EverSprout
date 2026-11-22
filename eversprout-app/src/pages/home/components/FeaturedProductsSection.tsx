@@ -1,7 +1,8 @@
 import ProductCard from "../../../components/common/ProductCard.tsx";
 import "../../../styles/pages/home/featured-products-section.css"
-import {products} from "../../../data/products.ts";
-import {useState} from "react";
+import type {Product} from "../../../data/products.ts";
+import {getProducts} from "../../../service/productService.ts";
+import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 
 const productTabs = [
@@ -24,7 +25,24 @@ const productTabs = [
 ];
 
 export default function FeaturedProductsSection() {
+    const [products, setProducts] = useState<Product[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
     const [activeTab, setActiveTab] = useState("all");
+
+    useEffect(() => {
+        getProducts()
+            .then((data) => {
+                setProducts(data);
+            })
+            .catch(() => {
+                setError("Không thể tải sản phẩm nổi bật.");
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    }, []);
+
     const filteredProducts = activeTab === "all" ? products : products.filter((product) => product.category === activeTab);
     const viewAll = activeTab === "all" ? "/products" : `/products?category=${encodeURIComponent(activeTab)}`;
 
@@ -48,9 +66,15 @@ export default function FeaturedProductsSection() {
                 </div>
 
                 <div className="home-product-grid">
-                    {filteredProducts.slice(0, 8).map((product) => (
-                        <ProductCard key={product.id} {...product}></ProductCard>
-                    ))}
+                    {loading ? (
+                        <p>Đang tải sản phẩm...</p>
+                    ) : error ? (
+                        <p>{error}</p>
+                    ) : (
+                        filteredProducts.slice(0, 8).map((product) => (
+                            <ProductCard key={product.id} {...product}></ProductCard>
+                        ))
+                    )}
                 </div>
 
                 <div className="home-products-more">

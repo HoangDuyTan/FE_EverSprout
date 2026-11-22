@@ -4,13 +4,11 @@ import {Link} from "react-router-dom";
 
 import "../../../styles/pages/home/hero-section.css";
 
-import img1 from "../../../assets/1.webp";
-import img2 from "../../../assets/2.webp";
-import img3 from "../../../assets/3.webp";
+import {imageUrls} from "../../../data/imageUrls";
 
 export default function HeroSection() {
     const [activeImg, setActiveImg] = useState(0);
-    const heroImgs = [img1, img2, img3];
+    const heroImgs = [imageUrls.product1, imageUrls.product2, imageUrls.rose];
 
     useEffect(() => {
         const timer = setInterval(() => {

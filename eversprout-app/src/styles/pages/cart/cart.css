@@ -91,6 +91,11 @@
     min-width: 0;
 }
 
+.cart-right {
+    position: sticky;
+    top: 150px;
+}
+
 /* Bảng sp */
 .cart-table {
     background: white;

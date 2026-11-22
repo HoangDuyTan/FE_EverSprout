@@ -1,15 +1,40 @@
+import {useEffect, useState} from "react";
 import {Link,useParams } from "react-router-dom";
 import Header from "../../components/layout/Header";
 import Navbar from "../../components/layout/Navbar";
 import Footer from "../../components/layout/Footer";
-import { products } from "../../data/products";
+import type {Product} from "../../data/products";
+import {getProductById} from "../../service/productService";
 import { formatPrice } from "../../data/cart";
 import ProductGallery from "./components/ProductGallery";
 import "../../styles/pages/products/product-detail-page.css";
 
 export default function ProductDetailPage() {
     const { id } = useParams(); //laays id tu url
-    const product = products.find((item) => item.id === Number(id)); //ep kiểu id từ chuỗi thành số đúng trường product.ts
+    const [product, setProduct] = useState<Product | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
+
+    useEffect(() => {
+        const productId = Number(id);
+
+        if (!productId) {
+            setError("Không tìm thấy sản phẩm.");
+            setLoading(false);
+            return;
+        }
+
+        getProductById(productId)
+            .then((data) => {
+                setProduct(data);
+            })
+            .catch(() => {
+                setError("Không thể tải thông tin sản phẩm.");
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    }, [id]);
 
     return (
         <>
@@ -17,10 +42,13 @@ export default function ProductDetailPage() {
             <Navbar />
             <main className="product-detail-page">
                 <div className="container">
-                    {/*check sp tồn tại*/}
-                    {!product ? (
+                    {loading ? (
                         <div>
-                            <h2>Không tìm thấy sản phẩm</h2>
+                            <h2>Đang tải sản phẩm...</h2>
+                        </div>
+                    ) : error || !product ? (
+                        <div>
+                            <h2>{error || "Không tìm thấy sản phẩm"}</h2>
                             <Link to="/products"> Quay lại danh sách sản phẩm </Link>
                         </div>
                     ) : (

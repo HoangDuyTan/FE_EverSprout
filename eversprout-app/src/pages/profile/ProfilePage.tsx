@@ -6,6 +6,7 @@ import Navbar from "../../components/layout/Navbar";
 import Footer from "../../components/layout/Footer";
 import ProfileSidebar, { ProfileTab } from "./components/ProfileSidebar";
 import ProfileInfoTab, { UserProfile } from "./components/ProfileInfoTab";
+import AddressBookTab from "./components/AddressBookTab";
 import "./tailwind.css";
 
 export default function ProfilePage() {
@@ -54,7 +55,10 @@ export default function ProfilePage() {
                         />
 
                         <div className="min-w-0">
-                            <ProfileInfoTab profile={profile} onSave={setProfile} />
+                            {activeTab === "info" && (
+                                <ProfileInfoTab profile={profile} onSave={setProfile} />
+                            )}
+                            {activeTab === "addresses" && <AddressBookTab />}
                         </div>
                     </div>
                 </div>

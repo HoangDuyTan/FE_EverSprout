@@ -1,6 +1,6 @@
-import { LogOut, Sprout, User } from "lucide-react";
+import { LogOut, MapPin, Sprout, User } from "lucide-react";
 
-export type ProfileTab = "info";
+export type ProfileTab = "info" | "addresses";
 
 interface ProfileSidebarProps {
     fullName: string;
@@ -11,7 +11,8 @@ interface ProfileSidebarProps {
 }
 
 const menuItems: { key: ProfileTab; label: string; icon: typeof User }[] = [
-    { key: "info", label: "Thông tin cá nhân", icon: User }
+    { key: "info", label: "Thông tin cá nhân", icon: User },
+    { key: "addresses", label: "Sổ địa chỉ", icon: MapPin }
 ];
 
 function getInitials(name: string) {

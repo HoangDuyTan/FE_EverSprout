@@ -95,3 +95,75 @@
     color: var(--primary-dark);
     font-size: 12px;
 }
+
+.purchase-category {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+.purchase-category span {
+    background: #e4ecdf;
+    color: #236b32;
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+}
+.purchase-title {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+.purchase-scientific {
+    color: #777;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+.purchase-rating {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background: white;
+    border-radius: 12px;
+    font-size: 12px;
+}
+.purchase-stars {
+    color: #ff9800;
+    font-size: 18px;
+}
+.purchase-stock {
+    color: #14722c;
+}
+.purchase-price-box {
+    background: #eef2ff;
+    padding: 22px;
+    border-radius: 14px;
+}
+.purchase-price-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.purchase-price {
+    color: #116329;
+    font-size: 36px;
+}
+.purchase-price-row del {
+    color: #888;
+    font-size: 17px;
+}
+.purchase-discount {
+    background: #ffe0e0;
+    color: #ce3333;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+}
+
+.purchase-price-box p {
+    font-size: 12px;
+    color: #666;
+    margin-top: 12px;
+}

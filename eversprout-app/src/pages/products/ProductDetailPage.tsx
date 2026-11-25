@@ -8,6 +8,7 @@ import {getProductById} from "../../service/productService";
 import { formatPrice } from "../../data/cart";
 import ProductGallery from "./components/ProductGallery";
 import "../../styles/pages/products/product-detail-page.css";
+import ProductPurchase from "./components/ProductPurchase";
 
 export default function ProductDetailPage() {
     const { id } = useParams(); //laays id tu url
@@ -68,17 +69,10 @@ export default function ProductDetailPage() {
                                                 ecology={product.ecology}
                                 />
 
-                                <div className="product-detail-info">
-                                    <span>{product.category}</span>
-                                    <h1>{product.name}</h1>
-                                    <p>{product.scientificName}</p>
-                                    <p>
-                                        Đánh giá: {product.rating}
-                                        ({product.reviews} lượt)
-                                    </p>
-                                    <h2> {formatPrice(product.price)}</h2>
-                                    <p> Tình trạng: {product.stock > 0? ` Còn ${product.stock} cây` : " Hết hàng"} </p>
-                                </div>
+                                <ProductPurchase
+                                    key={product.id}
+                                    product={product} />
+
                             </section>
                         </>
                     )}

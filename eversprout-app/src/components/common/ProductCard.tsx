@@ -3,7 +3,7 @@ import {useState} from "react";
 import "../../styles/common/product-card.css"
 import {getCart, addProductToCart, formatPrice,} from "../../data/cart.ts";
 import {Link, useNavigate} from "react-router-dom";
-import type {Product} from "../../data/products";
+import {Product, products} from "../../data/products";
 import {isFavorite, toggleFavorite} from "../../data/favorites";
 
 export default function ProductCard(product: Product) {
@@ -12,20 +12,17 @@ export default function ProductCard(product: Product) {
     const [favorite, setFavorite] = useState(() => isFavorite(id));
 
     function handleAddToCart() {
-        if (product.stock <= 0) {
-            alert("Sản phẩm đã hết hàng.");
+        const product = products.find((item) => item.id === id);
+        if (!product) {
+            alert("Không tìm thấy sản phẩm.");
             return false;
         }
 
-        // check sluong đã có trong giỏ
-        const cart = getCart();
-        const existingItem = cart.find((item) => item.product.id === id);
-        if (existingItem && existingItem.quantity >= product.stock) {
-            alert("Bạn đã thêm tối đa số lượng còn trong kho.");
-            return false;
+        const success = addProductToCart(product);
+        if (!success) {
+            alert("Sản phẩm đã đạt giới hạn tồn kho.");
         }
-        addProductToCart(product);
-        return true;
+        return success;
     }
 
     // button adtocart k reload

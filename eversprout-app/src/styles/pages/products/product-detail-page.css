@@ -244,3 +244,34 @@
     color: #14722c;
     font-size: 16px;
 }
+
+.purchase-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 25px;
+}
+.purchase-actions button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 15px 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+.purchase-add-btn {
+    background: #dcebdd;
+    color: #116329;
+}
+.purchase-actions button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+.purchase-message {
+    margin-top: 12px;
+    color: #116329;
+    font-size: 13px;
+}

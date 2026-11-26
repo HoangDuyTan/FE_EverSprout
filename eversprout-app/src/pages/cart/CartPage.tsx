@@ -5,7 +5,7 @@ import Navbar from "../../components/layout/Navbar";
 import Footer from "../../components/layout/Footer";
 import {products} from "../../data/products";
 import type {Product} from "../../data/products";
-import {getCart, saveCart, formatPrice,} from "../../data/cart";
+import {getCart, saveCart, formatPrice,addProductToCart,getCartItemKey,getCartItemPrice} from "../../data/cart";
 import type {CartItem as CartItemType} from "../../data/cart";
 import CartItem from "./components/CartItem";
 import CartSummary from "./components/CartSummary";
@@ -27,19 +27,20 @@ function CartPage() {
     }, [cart]);
 
     //tăng sluongF
-    function increaseQuantity(id: number) {
-        const selectedItem = cart.find((item) => item.product.id === id  );
-        if (!selectedItem) {
-            return;
-        }
-        if (selectedItem.quantity >= selectedItem.product.stock) {
+    function increaseQuantity(key: string) {
+        const selectedItem = cart.find((item) => getCartItemKey(item) === key);
+        if (!selectedItem) return;
+
+        const totalQuantity = cart.filter((item) => item.product.id === selectedItem.product.id)
+            .reduce((sum, item) => sum + item.quantity, 0);
+        if (totalQuantity >= selectedItem.product.stock) {
             setMessage("Sản phẩm đã đạt giới hạn tồn kho.");
             return;
         }
+
         const newCart = cart.map((item) => {
-            if (item.product.id === id) {
-                return {
-                    ...item, quantity: item.quantity + 1,
+            if (getCartItemKey(item) === key) {
+                return {...item,quantity: item.quantity + 1
                 };
             }
             return item;
@@ -49,12 +50,11 @@ function CartPage() {
     }
 
     // giảm sluong
-    function decreaseQuantity(id: number) {
+    function decreaseQuantity(key: string) {
         const newCart = cart.map((item) => {
-            if (item.product.id === id && item.quantity > 1) {
-                return {
-                    ...item, quantity: item.quantity - 1,
-                };
+            if (
+                getCartItemKey(item) === key &&item.quantity > 1) {
+                return {...item,quantity: item.quantity - 1};
             }
             return item;
         });
@@ -63,33 +63,23 @@ function CartPage() {
     }
 
     //xóa sp
-    function removeItem(id: number) {
-        const newCart = cart.filter((item) => item.product.id !== id);
+    function removeItem(key: string) {
+        const newCart = cart.filter(
+            (item) => getCartItemKey(item) !== key
+        );
+
         setCart(newCart);
         setMessage("Đã xóa sản phẩm khỏi giỏ hàng.");
     }
 
     // them sp mua kèm
     function addItem(product: Product) {
-        const existingItem = cart.find( (item) => item.product.id === product.id);
-        if (product.stock <= 0 || (existingItem && existingItem.quantity >= product.stock)) {
+        const success = addProductToCart(product);
+        if (!success) {
             setMessage("Sản phẩm đã đạt giới hạn tồn kho.");
             return;
         }
-
-        if (existingItem) {
-            const newCart = cart.map((item) => {
-                if (item.product.id === product.id) {
-                    return {
-                        ...item, quantity: item.quantity + 1,
-                    };
-                }
-                return item;
-            });
-            setCart(newCart);
-        } else {
-            setCart([...cart, { product: product, quantity: 1,}, ]);
-        }
+        setCart(getCart());
         setMessage("Đã thêm " + product.name + " vào giỏ.");
     }
 
@@ -105,9 +95,9 @@ function CartPage() {
     }
 
     //tạm tính
-    const subtotal = cart.reduce((sum, item) => {
-        return sum + item.product.price * item.quantity;
-    }, 0);
+    const subtotal= cart.reduce((sum,item) => {
+        return sum+ getCartItemPrice(item)* item.quantity;
+    },0);
 
     //phí vận chuyển
     let shipping = 30000;
@@ -193,7 +183,11 @@ function CartPage() {
                                 </div>
                                 {cart.length > 0
                                     ? (cart.map((item) => (
-                                        <CartItem key={item.product.id} item={item} onIncrease={increaseQuantity} onDecrease={decreaseQuantity} onRemove={removeItem}/>
+                                        <CartItem
+                                            key={getCartItemKey(item)} item={item} onIncrease={increaseQuantity}
+                                            onDecrease={decreaseQuantity} onRemove={removeItem}
+                                            canIncrease={ cart.filter((other) => other.product.id === item.product.id)
+                                                    .reduce((sum, other) => sum + other.quantity, 0) < item.product.stock }/>
                                     )))
                                     : (<div className="cart-empty">
                                             <h3>Giỏ hàng đang trống</h3>

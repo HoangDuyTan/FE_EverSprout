@@ -1,6 +1,7 @@
 import type { Product } from "../../../data/products";
-import { formatPrice } from "../../../data/cart";
+import { formatPrice,addProductToCart } from "../../../data/cart";
 import {useState} from "react";
+import {ShoppingCart } from "lucide-react";
 
 interface ProductPurchaseProps {
     product: Product;
@@ -11,6 +12,7 @@ export default function ProductPurchase({
 }: ProductPurchaseProps) {
     const [selectedVariantId, setSelectedVariantId] = useState(product.variants?.[0]?.id ?? "standard");
     const [quantity, setQuantity] = useState(1);
+    const [message, setMessage] = useState("");
     const selectedVariant = product.variants?.find((variant) => variant.id === selectedVariantId);
     const price = selectedVariant?.price ?? product.price;
     const totalPrice = price * quantity;
@@ -25,6 +27,15 @@ export default function ProductPurchase({
     function decreaseQuantity() {
         if (quantity > 1) {
             setQuantity(quantity - 1);
+        }
+    }
+
+    function handleAddToCart() {
+        const success = addProductToCart(product,quantity,selectedVariant);
+        if (success) {
+            setMessage("Đã thêm sản phẩm vào giỏ hàng!");
+        } else {
+            setMessage("Số lượng vượt quá tồn kho.");
         }
     }
     console.log("Variants:", product.variants);
@@ -86,6 +97,14 @@ export default function ProductPurchase({
                     <p> Tổng tạm tính: <strong> {formatPrice(totalPrice)}</strong></p>
                 </div>
             </div>
+
+            <div className="purchase-actions">
+                <button type="button" className="purchase-add-btn" onClick={handleAddToCart} disabled={product.stock <= 0} >
+                    <ShoppingCart size={18} />
+                    Thêm vào giỏ hàng
+                </button>
+            </div>
+            {message && ( <p className="purchase-message" role="status"> {message} </p>)}
         </div>
     );
 }

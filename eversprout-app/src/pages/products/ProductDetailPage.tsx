@@ -9,6 +9,7 @@ import { formatPrice } from "../../data/cart";
 import ProductGallery from "./components/ProductGallery";
 import "../../styles/pages/products/product-detail-page.css";
 import ProductPurchase from "./components/ProductPurchase";
+import { products } from "../../data/products";
 
 export default function ProductDetailPage() {
     const { id } = useParams(); //laays id tu url
@@ -18,8 +19,13 @@ export default function ProductDetailPage() {
 
     useEffect(() => {
         const productId = Number(id);
+        let cancelled = false;
 
-        if (!productId) {
+        setLoading(true);
+        setError("");
+        setProduct(null);
+
+        if(!Number.isInteger(productId) || productId <= 0) {
             setError("Không tìm thấy sản phẩm.");
             setLoading(false);
             return;
@@ -27,13 +33,23 @@ export default function ProductDetailPage() {
 
         getProductById(productId)
             .then((data) => {
-                setProduct(data);
+                if(cancelled) return;
+                if(!data) {
+                    setError("Không tìm thấy sản phẩm.");
+                    return;
+                }
+                const localProduct = products.find((item) => item.id === productId);
+                setProduct({...data, variants: data.variants ?? localProduct?.variants});
             })
             .catch(() => {
-                setError("Không thể tải thông tin sản phẩm.");
+                if(!cancelled) {
+                    setError("Không thể tải thông tin sản phẩm.");
+                }
             })
             .finally(() => {
-                setLoading(false);
+                if(!cancelled) {
+                    setLoading(false);
+                }
             });
     }, [id]);
 

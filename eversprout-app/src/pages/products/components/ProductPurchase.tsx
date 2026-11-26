@@ -1,5 +1,6 @@
 import type { Product } from "../../../data/products";
 import { formatPrice } from "../../../data/cart";
+import {useState} from "react";
 
 interface ProductPurchaseProps {
     product: Product;
@@ -8,7 +9,25 @@ interface ProductPurchaseProps {
 export default function ProductPurchase({
     product
 }: ProductPurchaseProps) {
-    const discountPercent = product.oldPrice > product.price? Math.round( ((product.oldPrice - product.price) / product.oldPrice) * 100): 0;
+    const [selectedVariantId, setSelectedVariantId] = useState(product.variants?.[0]?.id ?? "standard");
+    const [quantity, setQuantity] = useState(1);
+    const selectedVariant = product.variants?.find((variant) => variant.id === selectedVariantId);
+    const price = selectedVariant?.price ?? product.price;
+    const totalPrice = price * quantity;
+    const showDiscount =selectedVariantId === "standard" && product.oldPrice > price;
+    const discountPercent = showDiscount ? Math.round(((product.oldPrice - price) / product.oldPrice) * 100): 0;
+    // tăng/ giảm sluong
+    function increaseQuantity() {
+        if (quantity < product.stock) {
+            setQuantity(quantity + 1);
+        }
+    }
+    function decreaseQuantity() {
+        if (quantity > 1) {
+            setQuantity(quantity - 1);
+        }
+    }
+    console.log("Variants:", product.variants);
     return (
         <div className="product-detail-info">
             <div className="purchase-category">
@@ -27,15 +46,45 @@ export default function ProductPurchase({
             </div>
             <div className="purchase-price-box">
                 <div className="purchase-price-row">
-                    <strong className="purchase-price">{formatPrice(product.price)}</strong>
-                    {discountPercent > 0 && (
+                    <strong className="purchase-price">{formatPrice(price)}</strong>
+                    {showDiscount && (
                         <>
                             <del>{formatPrice(product.oldPrice)}</del>
-                            <span className="purchase-discount"> Giảm {discountPercent}%</span>
+                            <span className="purchase-discount">Giảm {discountPercent}%</span>
                         </>
                     )}
                 </div>
                 <p>Giá bán sản phẩm tại EverSprout.</p>
+            </div>
+            {/*kvuc chọn kích thước*/}
+            {product.variants && product.variants.length > 0 && (
+                <div className="purchase-variants">
+                    <h3>Kích thước chiều cao cây:</h3>
+                    <div className="purchase-variant-list">
+                        {product.variants.map((variant) => (
+                            <button key={variant.id} type="button"
+                                className={`purchase-variant ${selectedVariantId === variant.id ? "active" : ""}`}
+                                onClick={() => setSelectedVariantId(variant.id)}>
+
+                                <strong>{variant.name}</strong>
+                                <small>{variant.description}</small>
+                                <span>{formatPrice(variant.price)}</span>
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            )}
+            {/*sluong*/}
+            <div className="purchase-quantity-section">
+                <h3>Số lượng đặt mua:</h3>
+                <div className="purchase-quantity-row">
+                    <div className="purchase-quantity">
+                        <button type="button" onClick={decreaseQuantity} disabled={quantity <= 1}>  -</button>
+                        <span>{quantity}</span>
+                        <button type="button" onClick={increaseQuantity} disabled={quantity >= product.stock}>  +</button>
+                    </div>
+                    <p> Tổng tạm tính: <strong> {formatPrice(totalPrice)}</strong></p>
+                </div>
             </div>
         </div>
     );

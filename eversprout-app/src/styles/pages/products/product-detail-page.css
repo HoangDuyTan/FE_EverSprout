@@ -161,9 +161,86 @@
     border-radius: 15px;
     font-size: 12px;
 }
-
 .purchase-price-box p {
     font-size: 12px;
     color: #666;
     margin-top: 12px;
+}
+
+.purchase-variants {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+.purchase-variants h3, .purchase-quantity-section h3 {
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+.purchase-variant-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+.purchase-variant {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 15px;
+    background: white;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    text-align: left;
+}
+.purchase-variant.active {
+    border-color: #14722c;
+    background: #f5fff6;
+}
+.purchase-variant strong {
+    font-size: 14px;
+}
+.purchase-variant small {
+    font-size: 11px;
+    color: #777;
+}
+.purchase-variant span {
+    color: #14722c;
+    font-weight: bold;
+}
+.purchase-quantity-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.purchase-quantity {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 10px;
+}
+.purchase-quantity button {
+    width: 42px;
+    height: 42px;
+    border: none;
+    background: white;
+    font-size: 20px;
+}
+
+.purchase-quantity span {
+    width: 40px;
+    text-align: center;
+    font-weight: bold;
+}
+.purchase-quantity button:disabled {
+    color: #aaa;
+    cursor: not-allowed;
+}
+
+.purchase-quantity-row p {
+    color: #777;
+    font-size: 13px;
+}
+.purchase-quantity-row strong {
+    color: #14722c;
+    font-size: 16px;
 }

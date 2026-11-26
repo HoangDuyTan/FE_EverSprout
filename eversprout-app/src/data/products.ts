@@ -1,5 +1,12 @@
 import {imageUrls} from "./imageUrls";
 
+export interface ProductVariant {
+    id: string;
+    name: string;
+    description: string;
+    price: number;
+}
+
 export interface Product {
     id: number;
     name: string;
@@ -17,6 +24,7 @@ export interface Product {
     ecology: string;
     image: string;
     location: string;
+    variants?: ProductVariant[];
 }
 
 export const categories = [
@@ -45,6 +53,18 @@ export const products: Product[] = [
         ecology: "Ưa nắng toàn phần",
         image: imageUrls.product1,
         location: "Tiền Giang",
+        variants: [{
+            id: "standard",
+            name: "Cao 40 - 50 cm",
+            description: "Bầu 12x20cm, 3 tháng ghép",
+            price: 65000
+        },
+            {
+                id: "large",
+                name: "Cao 60 - 80 cm",
+                description: "Bầu 15x25cm, 2 cơi đọt",
+                price: 85000
+            }],
     },
     {
         id: 2,
@@ -63,6 +83,20 @@ export const products: Product[] = [
         ecology: "Ưa nắng toàn phần",
         image: imageUrls.guava,
         location: "Kiên Giang",
+        variants: [
+            {
+                id: "standard",
+                name: "Cao 40 - 50 cm",
+                description: "Bầu 12x20cm, 3 tháng ghép",
+                price: 65000
+            },
+            {
+                id: "large",
+                name: "Cao 60 - 80 cm",
+                description: "Bầu 15x25cm, 2 cơi đọt",
+                price: 85000
+            }
+        ]
     },
     {
         id: 3,
@@ -81,6 +115,20 @@ export const products: Product[] = [
         ecology: "Ưa nắng toàn phần",
         image: imageUrls.product2,
         location: "Đồng Tháp",
+        variants: [
+            {
+                id: "standard",
+                name: "Cao 40 - 50 cm",
+                description: "Bầu 12x20cm, 3 tháng ghép",
+                price: 65000
+            },
+            {
+                id: "large",
+                name: "Cao 60 - 80 cm",
+                description: "Bầu 15x25cm, 2 cơi đọt",
+                price: 85000
+            }
+        ]
     },
     {
         id: 4,

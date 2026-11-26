@@ -8,6 +8,7 @@ import ProfileSidebar, { ProfileTab } from "./components/ProfileSidebar";
 import ProfileInfoTab, { UserProfile } from "./components/ProfileInfoTab";
 import AddressBookTab from "./components/AddressBookTab";
 import OrdersTab from "./components/OrdersTab";
+import ChangePasswordTab from "./components/ChangePasswordTab";
 import "./tailwind.css";
 
 export default function ProfilePage() {
@@ -61,6 +62,7 @@ export default function ProfilePage() {
                             )}
                             {activeTab === "addresses" && <AddressBookTab />}
                             {activeTab === "orders" && <OrdersTab />}
+                            {activeTab === "password" && <ChangePasswordTab />}
                         </div>
                     </div>
                 </div>

@@ -1,73 +1,49 @@
 import { Trash2 } from "lucide-react";
 
 import type { CartItem as CartItemType } from "../../../data/cart";
-import { formatPrice } from "../../../data/cart";
+import {formatPrice,getCartItemKey,getCartItemPrice} from "../../../data/cart";
 
 interface Props {
     item: CartItemType;
-    onIncrease: (id: number) => void;
-    onDecrease: (id: number) => void;
-    onRemove: (id: number) => void;
+    onIncrease:(key: string) => void;
+    onDecrease:(key:string)=> void;
+    onRemove:(key: string) => void;
+    canIncrease: boolean;
 }
 
-function CartItem({item, onIncrease, onDecrease, onRemove, }: Props) {
+function CartItem({ item,onIncrease,onDecrease, onRemove, canIncrease }: Props) {
     const product = item.product;
-
-    // total = đơn giá x slượng
-    const total = product.price * item.quantity;
+    const itemKey = getCartItemKey(item);
+    const unitPrice = getCartItemPrice(item);
+    const total = unitPrice * item.quantity;
 
     return (
         <div className="cart-item">
-
-            {/*info sản phẩm */}
             <div className="cart-item-product">
-                <img src={product.image} alt={product.name} />
-
+                <img src={product.image} alt={product.name}/>
                 <div>
                     <h3>{product.name}</h3>
                     <p>{product.category}</p>
+                    {item.variantName && ( <p>Kích thước: {item.variantName}</p>)}
                     <span>{product.location}</span>
                 </div>
             </div>
 
-            {/* Đơn giá */}
             <div className="cart-item-price">
-                {formatPrice(product.price)}
+                {formatPrice(unitPrice)}
             </div>
 
-            {/* Số lượng */}
             <div className="cart-quantity">
-                <button
-                    type="button"
-                    disabled={item.quantity === 1}
-                    onClick={() => onDecrease(product.id)}
-                >
-                    -
-                </button>
-
+                <button type="button" disabled={item.quantity <= 1} onClick={() => onDecrease(itemKey)}> - </button>
                 <span>{item.quantity}</span>
-
-                <button
-                    type="button"
-                    onClick={() => onIncrease(product.id)}
-                    disabled={item.quantity >= product.stock}
-                >
-                    +
-                </button>
+                <button type="button" disabled={!canIncrease} onClick={() => onIncrease(itemKey)}>+ </button>
             </div>
 
-            {/* Thành tiền */}
             <div className="cart-item-total">
                 {formatPrice(total)}
             </div>
 
-            {/* Xóa sản phẩm */}
-            <button
-                type="button"
-                className="cart-remove"
-                onClick={() => onRemove(product.id)}
-                aria-label={`Xóa ${product.name}`}
-            >
+            <button type="button" className="cart-remove" onClick={() => onRemove(itemKey)} aria-label={`Xóa ${product.name}`} >
                 <Trash2 size={17} />
             </button>
         </div>

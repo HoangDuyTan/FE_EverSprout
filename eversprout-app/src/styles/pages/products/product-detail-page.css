@@ -275,3 +275,29 @@
     color: #116329;
     font-size: 13px;
 }
+.purchase-buy-btn {
+    background: #116329;
+    color: white;
+}
+.purchase-buy-btn:hover {
+    background: #0d4e20;
+}
+.purchase-support {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 18px;
+    margin-top: 25px;
+    background: #eef2ff;
+    border-radius: 12px;
+}
+.purchase-support strong {
+    font-size: 13px;
+    color: #116329;
+}
+.purchase-support p {
+    margin-top: 5px;
+    color: #666;
+    font-size: 11px;
+    line-height: 1.5;
+}

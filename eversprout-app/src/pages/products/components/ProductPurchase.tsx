@@ -1,7 +1,8 @@
 import type { Product } from "../../../data/products";
 import { formatPrice,addProductToCart } from "../../../data/cart";
 import {useState} from "react";
-import {ShoppingCart } from "lucide-react";
+import {ShoppingCart,Zap } from "lucide-react";
+import {useNavigate } from "react-router-dom";
 
 interface ProductPurchaseProps {
     product: Product;
@@ -10,6 +11,7 @@ interface ProductPurchaseProps {
 export default function ProductPurchase({
     product
 }: ProductPurchaseProps) {
+    const navigate = useNavigate();
     const [selectedVariantId, setSelectedVariantId] = useState(product.variants?.[0]?.id ?? "standard");
     const [quantity, setQuantity] = useState(1);
     const [message, setMessage] = useState("");
@@ -34,6 +36,15 @@ export default function ProductPurchase({
         const success = addProductToCart(product,quantity,selectedVariant);
         if (success) {
             setMessage("Đã thêm sản phẩm vào giỏ hàng!");
+        } else {
+            setMessage("Số lượng vượt quá tồn kho.");
+        }
+    }
+    //nút mua ngay
+    function handleBuyNow() {
+        const success = addProductToCart( product, quantity, selectedVariant);
+        if (success) {
+            navigate("/cart");
         } else {
             setMessage("Số lượng vượt quá tồn kho.");
         }
@@ -74,8 +85,8 @@ export default function ProductPurchase({
                     <div className="purchase-variant-list">
                         {product.variants.map((variant) => (
                             <button key={variant.id} type="button"
-                                className={`purchase-variant ${selectedVariantId === variant.id ? "active" : ""}`}
-                                onClick={() => setSelectedVariantId(variant.id)}>
+                                    className={`purchase-variant ${selectedVariantId === variant.id ? "active" : ""}`}
+                                    onClick={() => setSelectedVariantId(variant.id)}>
 
                                 <strong>{variant.name}</strong>
                                 <small>{variant.description}</small>
@@ -103,8 +114,22 @@ export default function ProductPurchase({
                     <ShoppingCart size={18} />
                     Thêm vào giỏ hàng
                 </button>
+                <button type="button" className="purchase-buy-btn" onClick={handleBuyNow} disabled={product.stock <= 0}>
+                    <Zap size={18} /> Mua ngay
+                </button>
             </div>
             {message && ( <p className="purchase-message" role="status"> {message} </p>)}
+
+            <div className="purchase-support">
+                <div>
+                    <strong>Đóng gói cẩn thận</strong>
+                    <p>Hạn chế hư hại trong quá trình vận chuyển.</p>
+                </div>
+                <div>
+                    <strong>Hỗ trợ chăm sóc cây</strong>
+                    <p>Tư vấn kỹ thuật và cách trồng cây giống.</p>
+                </div>
+            </div>
         </div>
     );
 }

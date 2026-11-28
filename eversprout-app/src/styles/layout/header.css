@@ -1,6 +1,9 @@
 .header {
     background-color: var(--white);
     border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 9999;
 }
 
 .header-main {
@@ -111,4 +114,24 @@
 .icon-btn:hover {
     color: var(--primary-color);
     background-color: var(--primary-light);
+}
+/* Sluong sp trên icon cart header */
+.cart-link, .favorite-link {
+    position: relative;
+}
+.cart-badge {
+    position: absolute;
+    top: -7px;
+    right: -8px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 4px;
+    background-color: #dc2626;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: bold;
 }

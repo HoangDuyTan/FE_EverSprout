@@ -1,0 +1,303 @@
+.product-detail-page {
+    min-height: 100vh;
+    padding: 24px 0 72px;
+    background-color: var(--section-background);
+}
+.product-detail-breadcrumb {
+    margin-bottom: 24px;
+    color: var(--text-light);
+    font-size: 14px;
+}
+.product-detail-main {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 40px;
+    align-items: start;
+}
+.product-detail-gallery,
+.product-detail-info {
+    min-width: 0;
+}
+
+/*ảnh main*/
+.product-gallery-main {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: white;
+}
+.product-gallery-main img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.product-gallery-tag {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    padding: 8px 14px;
+    border-radius: 20px;
+    color: white;
+    background-color: var(--primary-dark);
+    font-size: 13px;
+    font-weight: 600;
+}
+/*thumbnail*/
+.product-gallery-thumbnails {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr)); /*chia kvực thumbnail thành bốn cột bằng nhau*/
+    gap: 12px;
+    margin-top: 16px;
+}
+.product-gallery-thumbnail {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    background-color: white;
+    padding: 0;
+}
+.product-gallery-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.product-gallery-thumbnail span {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 6px;
+    background-color: rgba(0, 0, 0, 0.55);
+    color: white;
+    font-size: 11px;
+    text-align: center;
+}
+.product-gallery-thumbnail.active {
+    border-color: var(--primary-dark);
+}
+.product-gallery-thumbnail:hover {
+    border-color: var(--primary-color);
+}
+/*ttin còn lại*/
+.product-gallery-features {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+    padding: 16px;
+    border-radius: 12px;
+    background-color: #eef3ff;
+    color: var(--primary-dark);
+    font-size: 12px;
+}
+
+.purchase-category {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+.purchase-category span {
+    background: #e4ecdf;
+    color: #236b32;
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+}
+.purchase-title {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+.purchase-scientific {
+    color: #777;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+.purchase-rating {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background: white;
+    border-radius: 12px;
+    font-size: 12px;
+}
+.purchase-stars {
+    color: #ff9800;
+    font-size: 18px;
+}
+.purchase-stock {
+    color: #14722c;
+}
+.purchase-price-box {
+    background: #eef2ff;
+    padding: 22px;
+    border-radius: 14px;
+}
+.purchase-price-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.purchase-price {
+    color: #116329;
+    font-size: 36px;
+}
+.purchase-price-row del {
+    color: #888;
+    font-size: 17px;
+}
+.purchase-discount {
+    background: #ffe0e0;
+    color: #ce3333;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+}
+.purchase-price-box p {
+    font-size: 12px;
+    color: #666;
+    margin-top: 12px;
+}
+
+.purchase-variants {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+.purchase-variants h3, .purchase-quantity-section h3 {
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+.purchase-variant-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+.purchase-variant {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 15px;
+    background: white;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    text-align: left;
+}
+.purchase-variant.active {
+    border-color: #14722c;
+    background: #f5fff6;
+}
+.purchase-variant strong {
+    font-size: 14px;
+}
+.purchase-variant small {
+    font-size: 11px;
+    color: #777;
+}
+.purchase-variant span {
+    color: #14722c;
+    font-weight: bold;
+}
+.purchase-quantity-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.purchase-quantity {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 10px;
+}
+.purchase-quantity button {
+    width: 42px;
+    height: 42px;
+    border: none;
+    background: white;
+    font-size: 20px;
+}
+
+.purchase-quantity span {
+    width: 40px;
+    text-align: center;
+    font-weight: bold;
+}
+.purchase-quantity button:disabled {
+    color: #aaa;
+    cursor: not-allowed;
+}
+
+.purchase-quantity-row p {
+    color: #777;
+    font-size: 13px;
+}
+.purchase-quantity-row strong {
+    color: #14722c;
+    font-size: 16px;
+}
+
+.purchase-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 25px;
+}
+.purchase-actions button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 15px 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+.purchase-add-btn {
+    background: #dcebdd;
+    color: #116329;
+}
+.purchase-actions button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+.purchase-message {
+    margin-top: 12px;
+    color: #116329;
+    font-size: 13px;
+}
+.purchase-buy-btn {
+    background: #116329;
+    color: white;
+}
+.purchase-buy-btn:hover {
+    background: #0d4e20;
+}
+.purchase-support {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 18px;
+    margin-top: 25px;
+    background: #eef2ff;
+    border-radius: 12px;
+}
+.purchase-support strong {
+    font-size: 13px;
+    color: #116329;
+}
+.purchase-support p {
+    margin-top: 5px;
+    color: #666;
+    font-size: 11px;
+    line-height: 1.5;
+}

@@ -5,7 +5,13 @@ import RegisterPage from "./pages/auth/RegisterPage";
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
 import ProductListingPage from "./pages/products/ProductListingPage.tsx";
 import AboutPage from "./pages/about/AboutPage.tsx";
+import GuidePage from "./pages/guides/GuidePage.tsx";
+import GuideDetailPage from "./pages/guides/GuideDetailPage.tsx";
+import ContactPage from "./pages/contact/ContactPage.tsx";
 import ChatbotWidget from "./components/common/ChatbotWidget.tsx";
+import CartPage from "./pages/cart/CartPage";
+import ProductDetailPage from "./pages/products/ProductDetailPage";
+import FavoritesPage from "./pages/favorites/FavoritesPage";
 import PaymentPage from "./pages/payment/PaymentPage.tsx";
 import ProfilePage from "./pages/profile/ProfilePage.tsx";
 
@@ -23,7 +29,13 @@ function App() {
                 <Route path="/forgot-password" element={<ForgotPasswordPage />} />
 
                 <Route path="/products" element={<ProductListingPage/>} />
+                <Route path="/products/:id" element={<ProductDetailPage />} />
+                <Route path="/cart" element={<CartPage />} />
+                <Route path="/favorites" element={<FavoritesPage />} />
                 <Route path="/about" element={<AboutPage/>}/>
+                <Route path="/guides" element={<GuidePage/>}/>
+                <Route path="/guides/:id" element={<GuideDetailPage/>}/>
+                <Route path="/contact" element={<ContactPage/>}/>
                 <Route path="/payment" element={<PaymentPage/>}/>
                 <Route path="/profile" element={<ProfilePage/>}/>
                 <Route path="*" element={<Navigate to="/" replace />} />

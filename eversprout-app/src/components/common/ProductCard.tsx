@@ -1,43 +1,77 @@
 import {Heart, ShoppingCart, Star} from "lucide-react";
+import {useState} from "react";
 import "../../styles/common/product-card.css"
+import {getCart, addProductToCart, formatPrice,} from "../../data/cart.ts";
+import {Link, useNavigate} from "react-router-dom";
+import {Product, products} from "../../data/products";
+import {isFavorite, toggleFavorite} from "../../data/favorites";
 
-interface ProductCardProps {
-    image: string;
-    name: string;
-    scientificName?: string;
-    price: number;
-    oldPrice?: number;
-    rating: number;
-    reviews?: number;
-    sold?: number;
-    tag?: string;
-    stock?: number;
-    origin?: string;
-}
+export default function ProductCard(product: Product) {
+    const {id, image, name, scientificName, price, rating, sold, tag, stock} = product;
+    const navigate = useNavigate();
+    const [favorite, setFavorite] = useState(() => isFavorite(id));
 
-export default function ProductCard({image, name, scientificName, price, oldPrice, rating, reviews, sold, tag, stock, origin}: ProductCardProps) {
+    function handleAddToCart() {
+        const product = products.find((item) => item.id === id);
+        if (!product) {
+            alert("Không tìm thấy sản phẩm.");
+            return false;
+        }
+
+        const success = addProductToCart(product);
+        if (!success) {
+            alert("Sản phẩm đã đạt giới hạn tồn kho.");
+        }
+        return success;
+    }
+
+    // button adtocart k reload
+    function handleAdd() {
+        const success = handleAddToCart();
+        if (success) {
+            alert("Đã thêm " + name + " vào giỏ hàng!");
+        }
+    }
+
+    function handleFavorite() {
+        const value = toggleFavorite(id);
+        setFavorite(value);
+    }
+
+    // button mua ngay -> chuyển đến cart
+    function handleBuy() {
+        const success = handleAddToCart();
+        if (success) {
+            navigate("/cart");
+        }
+    }
+
     return (
         <article className="product-card">
             <div className="product-card-image-wrapper">
                 <img src={image} alt={name} className="product-card-image" loading="lazy"/>
                 {tag && (<span className="product-card-tag">{tag}</span>)}
-                <button type="button" className="product-card-favorite" aria-label="Thêm vào yêu thích"><Heart size={17}/></button>
+                <button type="button" className={`product-card-favorite ${favorite ? "active" : ""}`}
+                        aria-label={favorite ? "Xóa khỏi yêu thích" : "Thêm vào yêu thích"} onClick={handleFavorite}>
+                    <Heart size={17} fill={favorite ? "currentColor" : "none"}/>
+                </button>
             </div>
-
             <div className="product-card-content">
                 <div className="product-card-rating">
                     <Star size={13} fill="currentColor"/>
                     <strong>{rating}</strong>
                     <span>({sold})</span>
                 </div>
-
-                <h3>{name}</h3>
-
-                {scientificName && (<p>{scientificName}</p>)}
-
+                <h3><Link to={`/products/${id}`}>{name}</Link></h3>
+                {scientificName && <p>{scientificName}</p>}
                 <div className="product-card-bottom">
-                    <strong>{price}đ</strong>
-                    <button type="button"><ShoppingCart size={14}/>Mua</button>
+                    <strong>{formatPrice(price)}</strong>
+                    <div className="product-card-actions">
+                        <button type="button" onClick={handleAdd} disabled={stock === 0}>
+                            <ShoppingCart size={14}/> Thêm giỏ
+                        </button>
+                        <button type="button" onClick={handleBuy} disabled={stock === 0}> Mua ngay</button>
+                    </div>
                 </div>
             </div>
         </article>

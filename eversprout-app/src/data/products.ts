@@ -1,6 +1,11 @@
-import product1 from "../assets/1.webp";
-import product2 from "../assets/2.webp";
-import product3 from "../assets/3.webp";
+import {imageUrls} from "./imageUrls";
+
+export interface ProductVariant {
+    id: string;
+    name: string;
+    description: string;
+    price: number;
+}
 
 export interface Product {
     id: number;
@@ -19,6 +24,7 @@ export interface Product {
     ecology: string;
     image: string;
     location: string;
+    variants?: ProductVariant[];
 }
 
 export const categories = [
@@ -45,8 +51,20 @@ export const products: Product[] = [
         sold: 115,
         propagation: "Ghép cành",
         ecology: "Ưa nắng toàn phần",
-        image: product1,
+        image: imageUrls.product1,
         location: "Tiền Giang",
+        variants: [{
+            id: "standard",
+            name: "Cao 40 - 50 cm",
+            description: "Bầu 12x20cm, 3 tháng ghép",
+            price: 65000
+        },
+            {
+                id: "large",
+                name: "Cao 60 - 80 cm",
+                description: "Bầu 15x25cm, 2 cơi đọt",
+                price: 85000
+            }],
     },
     {
         id: 2,
@@ -63,8 +81,22 @@ export const products: Product[] = [
         sold: 120,
         propagation: "Chiết cành",
         ecology: "Ưa nắng toàn phần",
-        image: product2,
+        image: imageUrls.guava,
         location: "Kiên Giang",
+        variants: [
+            {
+                id: "standard",
+                name: "Cao 40 - 50 cm",
+                description: "Bầu 12x20cm, 3 tháng ghép",
+                price: 65000
+            },
+            {
+                id: "large",
+                name: "Cao 60 - 80 cm",
+                description: "Bầu 15x25cm, 2 cơi đọt",
+                price: 85000
+            }
+        ]
     },
     {
         id: 3,
@@ -81,8 +113,22 @@ export const products: Product[] = [
         sold: 50,
         propagation: "Ghép cành",
         ecology: "Ưa nắng toàn phần",
-        image: product3,
+        image: imageUrls.product2,
         location: "Đồng Tháp",
+        variants: [
+            {
+                id: "standard",
+                name: "Cao 40 - 50 cm",
+                description: "Bầu 12x20cm, 3 tháng ghép",
+                price: 65000
+            },
+            {
+                id: "large",
+                name: "Cao 60 - 80 cm",
+                description: "Bầu 15x25cm, 2 cơi đọt",
+                price: 85000
+            }
+        ]
     },
     {
         id: 4,
@@ -99,7 +145,7 @@ export const products: Product[] = [
         sold: 180,
         propagation: "Ghép cành",
         ecology: "Ưa nắng toàn phần",
-        image: product1,
+        image: imageUrls.pomelo,
         location: "Bến Tre",
     },
     {
@@ -117,7 +163,7 @@ export const products: Product[] = [
         sold: 59,
         propagation: "Ươm hạt",
         ecology: "Ưa nắng toàn phần",
-        image: product2,
+        image: imageUrls.tomato,
         location: "Sa Đéc",
     },
     {
@@ -135,7 +181,7 @@ export const products: Product[] = [
         sold: 87,
         propagation: "Chiết cành",
         ecology: "Chịu hạn tốt",
-        image: product3,
+        image: imageUrls.rose,
         location: "Bình Dương",
     },
     {
@@ -153,7 +199,7 @@ export const products: Product[] = [
         sold: 97,
         propagation: "Ghép cành",
         ecology: "Ưa nắng toàn phần",
-        image: product1,
+        image: imageUrls.durian,
         location: "Đồng Nai",
     },
     {
@@ -171,7 +217,7 @@ export const products: Product[] = [
         sold: 286,
         propagation: "Ghép cành",
         ecology: "Ưa nắng toàn phần",
-        image: product2,
+        image: imageUrls.product1,
         location: "Bình Phước",
     },
     {
@@ -189,7 +235,7 @@ export const products: Product[] = [
         sold: 76,
         propagation: "Ươm hạt",
         ecology: "Chịu hạn tốt",
-        image: product3,
+        image: imageUrls.basil,
         location: "Bình Dương",
     },
 
@@ -208,7 +254,7 @@ export const products: Product[] = [
         sold: 36,
         propagation: "Không áp dụng",
         ecology: "Phù hợp nhiều loại cây",
-        image: product3,
+        image: imageUrls.seedlings,
         location: "TP. Hồ Chí Minh",
     },
     {
@@ -226,7 +272,7 @@ export const products: Product[] = [
         sold: 99,
         propagation: "Không áp dụng",
         ecology: "Phù hợp nhiều loại cây",
-        image: product1,
+        image: imageUrls.product2,
         location: "TP. Hồ Chí Minh",
     },
     {
@@ -244,7 +290,7 @@ export const products: Product[] = [
         sold: 67,
         propagation: "Không áp dụng",
         ecology: "Phù hợp nhiều loại cây",
-        image: product2,
+        image: imageUrls.rosemary,
         location: "Đồng Nai",
     },
 

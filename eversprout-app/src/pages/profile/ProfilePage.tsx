@@ -11,6 +11,13 @@ import OrdersTab from "./components/OrdersTab";
 import ChangePasswordTab from "./components/ChangePasswordTab";
 import "./tailwind.css";
 
+const tabTitle: Record<ProfileTab, string> = {
+    info: "Thông tin cá nhân",
+    addresses: "Sổ địa chỉ",
+    orders: "Đơn hàng của tôi",
+    password: "Đổi mật khẩu"
+};
+
 export default function ProfilePage() {
     const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState<ProfileTab>("info");
@@ -41,7 +48,7 @@ export default function ProfilePage() {
                         <span>Tài khoản</span>
                     </span>
                     <ChevronRight size={14} className="text-[#9ca3af]" />
-                    <span className="text-[#4b5563]">Thông tin cá nhân</span>
+                    <span className="text-[#4b5563]">{tabTitle[activeTab]}</span>
                 </div>
             </div>
 

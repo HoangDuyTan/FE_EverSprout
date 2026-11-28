@@ -257,3 +257,16 @@
     font-size: 13px;
     font-weight: 600;
 }
+
+.contact-error {
+    padding: 10px 12px;
+    border-radius: 7px;
+    color: #b91c1c;
+    background-color: #fee2e2;
+    font-size: 12px;
+}
+
+.contact-submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}

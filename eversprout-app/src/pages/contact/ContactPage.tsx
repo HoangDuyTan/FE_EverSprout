@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {Clock, Mail, MapPin, Phone, Send} from "lucide-react";
+import {type Contact, createContact} from "../../service/contactService.ts";
 
 import Header from "../../components/layout/Header";
 import Navbar from "../../components/layout/Navbar";
@@ -31,7 +32,7 @@ const contactInfo = [
 ];
 
 export default function ContactPage() {
-    const [form, setForm] = useState({
+    const [form, setForm] = useState<Contact>({
         name: "",
         email: "",
         phone: "",
@@ -40,10 +41,10 @@ export default function ContactPage() {
     });
 
     const [submitted, setSubmitted] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
 
-    function handleChange(
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-    ) {
+    function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
         const {name, value} = e.target;
 
         setForm({
@@ -54,20 +55,33 @@ export default function ContactPage() {
         if (submitted) {
             setSubmitted(false);
         }
+
+        setError("");
     }
 
-    function handleSubmit(e: React.FormEvent) {
+    async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
 
-        setSubmitted(true);
+        setLoading(true);
+        setSubmitted(false);
+        setError("");
 
-        setForm({
-            name: "",
-            email: "",
-            phone: "",
-            subject: "",
-            message: ""
-        });
+        try {
+            await createContact(form);
+
+            setSubmitted(true);
+            setForm({
+                name: "",
+                email: "",
+                phone: "",
+                subject: "",
+                message: ""
+            });
+        } catch {
+            setError("Không thể gửi yêu cầu. Vui lòng thử lại.");
+        }
+
+        setLoading(false);
     }
 
     return (
@@ -167,10 +181,16 @@ export default function ContactPage() {
                                 </div>
 
                                 {submitted && (
-                                    <div className="contact-success">Thông tin đã được ghi nhận trên giao diện.</div>
+                                    <div className="contact-success">Yêu cầu đã được gửi thành công.</div>
                                 )}
 
-                                <button type="submit" className="contact-submit-btn"><Send size={16}/>Gửi yêu cầu
+                                {error && (
+                                    <div className="contact-error">{error}</div>
+                                )}
+
+                                <button type="submit" className="contact-submit-btn" disabled={loading}>
+                                    <Send size={16}/>
+                                    {loading ? "Đang gửi..." : "Gửi yêu cầu"}
                                 </button>
                             </form>
                         </div>

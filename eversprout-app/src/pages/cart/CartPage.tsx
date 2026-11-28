@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import Header from "../../components/layout/Header";
 import Navbar from "../../components/layout/Navbar";
 import Footer from "../../components/layout/Footer";
-import {products} from "../../data/products";
+import {getProducts} from "../../service/productService";
 import type {Product} from "../../data/products";
 import {getCart, saveCart, formatPrice,addProductToCart,getCartItemKey,getCartItemPrice} from "../../data/cart";
 import type {CartItem as CartItemType} from "../../data/cart";
@@ -21,10 +21,22 @@ function CartPage() {
     const [couponApplied, setCouponApplied] = useState(false);
     const [message, setMessage] = useState("");
 
+    const [products, setProducts] = useState<Product[]>([]);
+
     // update Cart khi dlieu thay đổi
     useEffect(() => {
         saveCart(cart);
     }, [cart]);
+
+    useEffect(() => {
+        getProducts()
+            .then((data) => {
+                setProducts(data);
+            })
+            .catch(() => {
+                setMessage("Không thể tải sản phẩm.");
+            });
+    }, []);
 
     //tăng sluongF
     function increaseQuantity(key: string) {
@@ -118,11 +130,17 @@ function CartPage() {
     const remaining = Math.max(0, 300000 - subtotal);
 
     function addDemoProducts() {
+        if (products.length < 3) {
+            setMessage("Chưa tải đủ sản phẩm.");
+            return;
+        }
+
         setCart([
             {product: products[0], quantity: 2},
             {product: products[1], quantity: 3},
             {product: products[2], quantity: 1},
         ]);
+
         setCouponApplied(false);
         setMessage("Đã tạo giỏ hàng mẫu để kiểm thử.");
     }
@@ -216,7 +234,7 @@ function CartPage() {
                             </div>
 
                             {/*Gợi ý sp */}
-                            <CartRecommendations cart={cart} onAdd={addItem}/>
+                            <CartRecommendations cart={cart} products={products} onAdd={addItem}/>
                         </div>
                         {/* Column right */}
                         <div className="cart-right">

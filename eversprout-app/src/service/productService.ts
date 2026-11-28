@@ -1,6 +1,5 @@
 import apiClient from "../api/apiClient";
-import {products} from "../data/products";
-import type {Product} from "../data/products";
+import type {ProductVariant} from "../data/products";
 
 interface ApiProduct {
     id: string;
@@ -21,78 +20,40 @@ interface ApiProduct {
         ecology: string;
         image: string;
         location: string;
+        variants?: ProductVariant[];
     };
 }
 
-let productsPromise: Promise<Product[]> | null = null;
+export async function getProducts() {
+    const res = await apiClient.get<ApiProduct[]>("/collections/products/objects");
 
-function mapProduct(item: ApiProduct): Product {
-    return {
+    return res.data.map((item) => ({
         id: item.data.productId,
         name: item.name,
-        ...item.data
-    };
+        scientificName: item.data.scientificName,
+        category: item.data.category,
+        origin: item.data.origin,
+        price: item.data.price,
+        oldPrice: item.data.oldPrice,
+        rating: item.data.rating,
+        reviews: item.data.reviews,
+        stock: item.data.stock,
+        tag: item.data.tag,
+        sold: item.data.sold,
+        propagation: item.data.propagation,
+        ecology: item.data.ecology,
+        image: item.data.image,
+        location: item.data.location,
+        variants: item.data.variants
+    }));
 }
 
-function getApiData(product: Product) {
-    const {id, name, ...data} = product;
-
-    return {
-        name: name,
-        data: {
-            productId: id,
-            ...data
-        }
-    };
-}
-
-async function getApiProducts() {
-    const res = await apiClient.get<ApiProduct[]>("/collections/products/objects");
-    return res.data;
-}
-
-async function syncProducts(apiProducts: ApiProduct[]) {
-    for (const product of products) {
-        const current = apiProducts.find((item) => item.data.productId === product.id);
-
-        if (!current) {
-            await apiClient.post("/collections/products/objects", getApiData(product));
-            continue;
-        }
-
-        if (!current.data.image || current.data.image.includes("URL_CLOUDINARY")) {
-            await apiClient.patch(`/collections/products/objects/${current.id}`, getApiData(product));
-        }
-    }
-}
-
-async function loadProducts(): Promise<Product[]> {
-    let apiProducts = await getApiProducts();
-
-    const needSync = products.some((product) => {
-        const current = apiProducts.find((item) => item.data.productId === product.id);
-        return !current || !current.data.image || current.data.image.includes("URL_CLOUDINARY");
-    });
-
-    if (needSync) {
-        await syncProducts(apiProducts);
-        apiProducts = await getApiProducts();
-    }
-
-    return apiProducts.map(mapProduct);
-}
-
-export function getProducts(): Promise<Product[]> {
-    if (!productsPromise) {
-        productsPromise = loadProducts().finally(() => {
-            productsPromise = null;
-        });
-    }
-
-    return productsPromise;
-}
-
-export async function getProductById(productId: number): Promise<Product | null> {
+export async function getProductById(productId: number) {
     const products = await getProducts();
-    return products.find((item) => item.id === productId) || null;
+
+    const product = products.find(
+        (item) => item.id === productId
+    );
+
+    return product || null;
 }

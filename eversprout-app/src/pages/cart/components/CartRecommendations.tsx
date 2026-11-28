@@ -1,14 +1,14 @@
 import type { Product } from "../../../data/products";
-import { products } from "../../../data/products";
 import { formatPrice } from "../../../data/cart";
 import type { CartItem } from "../../../data/cart";
 
 interface Props {
     cart: CartItem[];
+    products: Product[];
     onAdd: (product: Product) => void;
 }
 
-function CartRecommendations({ cart,onAdd }: Props) {
+function CartRecommendations({ cart, products,onAdd }: Props) {
     //lấy 3 sp để gợi ý
     const recommendedProducts = products.filter(
         (product)=> product.category==="Vật tư trồng cây"

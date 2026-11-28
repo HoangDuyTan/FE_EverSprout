@@ -1,9 +1,9 @@
 import {Heart, ShoppingCart, Star} from "lucide-react";
 import {useState} from "react";
 import "../../styles/common/product-card.css"
-import {getCart, addProductToCart, formatPrice,} from "../../data/cart.ts";
 import {Link, useNavigate} from "react-router-dom";
-import {Product, products} from "../../data/products";
+import {addProductToCart, formatPrice} from "../../data/cart.ts";
+import type {Product} from "../../data/products";
 import {isFavorite, toggleFavorite} from "../../data/favorites";
 
 export default function ProductCard(product: Product) {
@@ -12,16 +12,12 @@ export default function ProductCard(product: Product) {
     const [favorite, setFavorite] = useState(() => isFavorite(id));
 
     function handleAddToCart() {
-        const product = products.find((item) => item.id === id);
-        if (!product) {
-            alert("Không tìm thấy sản phẩm.");
-            return false;
-        }
-
         const success = addProductToCart(product);
+
         if (!success) {
             alert("Sản phẩm đã đạt giới hạn tồn kho.");
         }
+
         return success;
     }
 

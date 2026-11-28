@@ -1,62 +1,52 @@
 import {useEffect, useState} from "react";
-import {Link,useParams } from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import Header from "../../components/layout/Header";
 import Navbar from "../../components/layout/Navbar";
 import Footer from "../../components/layout/Footer";
 import type {Product} from "../../data/products";
 import {getProductById} from "../../service/productService";
-import { formatPrice } from "../../data/cart";
 import ProductGallery from "./components/ProductGallery";
 import "../../styles/pages/products/product-detail-page.css";
 import ProductPurchase from "./components/ProductPurchase";
-import { products } from "../../data/products";
 
 export default function ProductDetailPage() {
-    const { id } = useParams(); //laays id tu url
+    const {id} = useParams(); //laays id tu url
     const [product, setProduct] = useState<Product | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
     useEffect(() => {
         const productId = Number(id);
-        let cancelled = false;
 
-        setLoading(true);
-        setError("");
-        setProduct(null);
-
-        if(!Number.isInteger(productId) || productId <= 0) {
+        if (!productId || productId <= 0) {
             setError("Không tìm thấy sản phẩm.");
             setLoading(false);
             return;
         }
 
+        setLoading(true);
+        setError("");
+
         getProductById(productId)
             .then((data) => {
-                if(cancelled) return;
-                if(!data) {
+                if (data) {
+                    setProduct(data);
+                } else {
                     setError("Không tìm thấy sản phẩm.");
-                    return;
                 }
-                const localProduct = products.find((item) => item.id === productId);
-                setProduct({...data, variants: data.variants ?? localProduct?.variants});
             })
             .catch(() => {
-                if(!cancelled) {
-                    setError("Không thể tải thông tin sản phẩm.");
-                }
+                setError("Không thể tải thông tin sản phẩm.");
             })
             .finally(() => {
-                if(!cancelled) {
-                    setLoading(false);
-                }
+                setLoading(false);
             });
     }, [id]);
 
     return (
         <>
-            <Header />
-            <Navbar />
+            <Header/>
+            <Navbar/>
             <main className="product-detail-page">
                 <div className="container">
                     {loading ? (
@@ -77,7 +67,7 @@ export default function ProductDetailPage() {
                                 <span> / {product.name}</span>
                             </div>
                             <section className="product-detail-main">
-                                <ProductGallery images={[{src:product.image , label:"Tổng thể"}]}
+                                <ProductGallery images={[{src: product.image, label: "Tổng thể"}]}
                                                 productName={product.name}
                                                 tag={product.tag}
                                                 origin={product.origin}
@@ -87,14 +77,14 @@ export default function ProductDetailPage() {
 
                                 <ProductPurchase
                                     key={product.id}
-                                    product={product} />
+                                    product={product}/>
 
                             </section>
                         </>
                     )}
                 </div>
             </main>
-            <Footer />
+            <Footer/>
         </>
     );
 }
